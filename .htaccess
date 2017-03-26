@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*) index.php/index.php/1 [L] 
+</IfModule>
+
+	php_value upload_max_filesize 10M
+	php_value post_max_size 20M
+	php_value memory_limit 128M
