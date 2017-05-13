@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class _ extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,13 +20,12 @@ class Dashboard extends CI_Controller {
 	 */
 	public function __construct(){
 		parent::__construct();
-		$this->load->database();
 	}
-	public function index()
-	{
-		$data['page_type'] = "login";
-		$this->load->view('_partials/_header');
-		$this->load->view('_pages/board');
-		$this->load->view('_partials/_footer');
+
+	public function index(){
+		$data['page_type'] = 'unknown';
+		$this->load->view('_partials/_header',$data);
+		$this->load->view('_pages/unknown');
+		$this->load->view('_partials/_footer',$data);
 	}
 }

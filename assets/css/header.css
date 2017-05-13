@@ -1,0 +1,65 @@
+/********************************
+ _partials/_header.php css file
+********************************/
+@import url(https://fonts.googleapis.com/css?family=Mukta+Vaani|Pacifico|Ubuntu|Peddana|Dosis|Lobster|Lato|Oswald|Cinzel|Tinos|Buda|PT+Sans+Narrow|Open+Sans+Condensed|Josefin+Sans|Raleway|Montserrat|Cinzel);
+
+*{
+	margin:0;
+	padding:0;
+	font-family: 'Mukta Vaani', sans-serif !important;
+}
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: url('../img/citylights.jpeg');
+}
+button{
+	cursor: pointer;
+	color: white;
+  font-size: 12px;
+}
+.alert{
+  width: 50%;
+  margin: 0 auto;
+}
+.form-signin {
+  max-width: 100%;
+  text-align: center;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 15rem;
+  font-family: 'Pacifico', sans-serif !important;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 12px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.sign-in-fields{
+	margin: 0 auto;
+}
+.sign-in-fields > input{
+	margin-top: 1% !important;
+}

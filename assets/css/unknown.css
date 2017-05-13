@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Mukta+Vaani|Pacifico|Ubuntu|Peddana|Dosis|Lobster|Lato|Oswald|Cinzel|Tinos|Buda|PT+Sans+Narrow|Open+Sans+Condensed|Josefin+Sans|Raleway|Montserrat|Cinzel);
+
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+h2{
+	margin-top: 20%;
+	margin-bottom: 5%;
+	font-family: 'Pacifico';
+	font-size: 15rem;
+}
