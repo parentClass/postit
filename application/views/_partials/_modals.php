@@ -19,7 +19,7 @@
 	      		<? if($logged_blogger_data[0]['isNew']==1): ?>
 	      			<div class="alert alert-success" role="alert">
 	      				<small>
-	      					<strong>Well done!</strong> Let's tell the world that we've arrived!
+	      					Well done! Let's tell the world that we've arrived!
 	      				</small>
 	      			</div>
 	      		<? else: ?>
@@ -36,7 +36,7 @@
 				  </div>
 				  <div class="form-group">
 				    <label for="post_body">Post body</label>
-				    <textarea class="form-control" name="post_body" id="post_body" rows="3" required></textarea>
+				    <textarea class="form-control" name="post_body" id="post_body" rows=11 cols=50 maxlength="1500" required></textarea>
 				  </div>
 				  <div class="form-group">
 				  	Post category <br/><br/>
@@ -116,5 +116,3 @@
 	    </div>
 	  </div>
 	</div>
-
-	

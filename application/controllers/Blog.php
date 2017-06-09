@@ -30,7 +30,7 @@ class Blog extends CI_Controller {
 		$blogger_id = $this->clean($blogger_id);
 
 		// no blogger id (missing uri parameter)
-		if(empty($blogger_id)){ 
+		if(empty($blogger_id)){
 			redirect('/','refresh');
 		}
 
@@ -114,13 +114,13 @@ class Blog extends CI_Controller {
 
 		$foo = json_decode(json_encode($x),true);
 
-		for ($i=0; $i < count($foo); $i++) { 
+		for ($i=0; $i < count($foo); $i++) {
 			$tags[] = $foo[$i]['tags'];
 		}
 
 
 		if(!empty($x)){
-			for ($i=0; $i < count($foo); $i++) { 
+			for ($i=0; $i < count($foo); $i++) {
 				array_push($temp, [
 					'id' => $foo[$i]['id'],
 					'user_id' => $foo[$i]['user_id'],
@@ -134,7 +134,7 @@ class Blog extends CI_Controller {
 			}
 		}else{
 			array_push($temp, [
-				"post_warning"=>"No adventures shared yet. :|"
+				"post_warning"=>"No adventures shared yet."
 			]);
 		}
 		return $temp;

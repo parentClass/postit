@@ -78,7 +78,7 @@
           <? else: ?>
           		<? $counter = 0; ?>
           	<? foreach($posts_data as $row): ?>
-          		
+
           	  <div class="blog-post">
           	  	<? if('@'.$currUser==$viewed_blogger_data[0]['uname']): ?>
           	  		<div class="float-right">
@@ -106,7 +106,7 @@
           	  		<p class="blog-post-meta">
           	  			<small>
           	  				<? echo date('M j Y g:i A', strtotime($row['post_date'])); ?> by <? echo $viewed_blogger_data[0]['uname']; ?>
-          	  			</small><br/>          	  			
+          	  			</small><br/>
           	  			<? for($i=0; $i<count($posts_data[$counter]['post_tags']); $i++): ?>
 							<span class="badge badge-<? echo strtolower($posts_data[$counter]['post_tags'][$i]['tag_name']);  ?>">
 	          	  				<? echo stripcslashes($posts_data[$counter]['post_tags'][$i]['tag_emoji']) . " " . $posts_data[$counter]['post_tags'][$i]['tag_name']; ?>

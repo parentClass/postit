@@ -59,7 +59,7 @@ class Gates extends CI_Controller {
 			$this->session->set_flashdata('success_msg',"Welcome " . $container['first_name'] . "! Glad to see you today.");
 			redirect('blog/'. $this->clean($data['username']),'refresh');
 		}else{
-			$this->session->set_flashdata("error_msg","Invalid login credentials!");
+			$this->session->set_flashdata("error_msg","Your sign in credentials does not match the one in our record.");
 			redirect('/','refresh');
 		}
 	}
@@ -83,7 +83,7 @@ class Gates extends CI_Controller {
 				$res = $this->Post->createUser($data);
 
 				if($res){
-					$this->session->set_flashdata("signup_success_msg","Thanks " . ucfirst($data['first_name']) . " for joining the community.</br>The blogging begins and may the posts be with you.");
+					$this->session->set_flashdata("signup_success_msg","Hi " . ucfirst($data['first_name']) . "! Thanks for joining the community.</br>Sign in to start blogging.");
 					redirect('/','refresh');
 				}else{
 					$this->session->set_flashdata("signup_failed_msg","Sorry, I wasn't able to sign you up.");
