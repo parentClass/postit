@@ -26,18 +26,18 @@
         <link rel='stylesheet' type='text/css' href='<?php echo site_url() . 'assets/css/bootstrap.css'; ?>'>
         <link rel="stylesheet" type="text/css" href='<?php echo site_url() . 'assets/css/animate.min.css'; ?>'>
         <? if($page_type=="login"): ?>
-            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/header.css'; ?>"; ?>
-            <? echo "<link rel='stylesheet' type='text/css' href='". site_url() ."assets/css/jquery.fullPage.css'>; ?>"; ?>
+            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/header.css'>"; ?>
+            <? echo "<link rel='stylesheet' type='text/css' href='". site_url() ."assets/css/jquery.fullPage.css'>"; ?>
         <? elseif($page_type=="dashboard"): ?>
-            <? echo "<style>"; ?>
-            <? echo ".blog-masthead{background-color:" . $viewed_blogger_data[0]['color_preference'] ."!important ;}"; ?>
-            <? echo ".dropdown-menu a:hover{color:". $viewed_blogger_data[0]['color_preference'] .";}"; ?>
-            <? echo ".blog-title, .blog-description{font-family:" . $viewed_blogger_data[0]['font_preference'] . ";}"; ?>
-            <? echo ".blog-post-menu:hover{font-family:" . $viewed_blogger_data[0]['color_preference'] . ";}"; ?>
-            <? echo "</style>"; ?>
-            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/dashboard.css'; ?>"; ?>
+            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/dashboard.css'>" . "\n"; ?>
+            <? echo "<style>" . "\n"; ?>
+            <? echo ".blog-masthead{background-color:" . $viewed_blogger_data[0]['color_preference'] ."!important ;}" . "\n"; ?>
+            <? echo ".dropdown-menu a:hover{color:". $viewed_blogger_data[0]['color_preference'] .";}" . "\n"; ?>
+            <? echo ".blog-title, .blog-description{font-family:" . $viewed_blogger_data[0]['font_preference'] . ";}" . "\n"; ?>
+            <? echo ".blog-post-menu:hover{color: #651fff;font-family:" . $viewed_blogger_data[0]['color_preference'] . ";text-decoration:none !important;}" . "\n"; ?>
+            <? echo "</style>" . "\n"; ?>
         <? elseif($page_type=="unknown"): ?>
-            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/unknown.css'; ?>"; ?>
+            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/unknown.css'"; ?>
         <?endif;?>
     </head>
 <body class="animated fadeIn">

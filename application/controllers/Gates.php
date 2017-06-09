@@ -66,19 +66,20 @@ class Gates extends CI_Controller {
 
 	public function register(){
 		$data = array(
-			'first_name' => $this->input->post('firstname'),
-			'last_name' => $this->input->post('lastname'),
-			'username' => "@". $this->clean($this->input->post('username')),
-			'email' => $this->input->post('email'),
-			'tagline' => $this->input->post('tagline'),
+			'first_name' => $this->security->xss_clean($this->input->post('firstname')),
+			'last_name' => $this->security->xss_clean($this->input->post('lastname')),
+			'email' => $this->security->xss_clean($this->input->post('email')),
+			'uname' => "@". $this->security->xss_clean($this->clean($this->input->post('username'))),
+			'pass' => MD5($this->security->xss_clean($this->input->post('password'))),
+			'tagline' => $this->security->xss_clean($this->input->post('tagline')),
 			'color_preference' => $this->input->post('color_preference'),
-			'password' => $this->input->post('password')
+			'font_preference' => $this->security->xss_clean($this->input->post('font_preference'))
 		);
 
-		$isUsernameTaken = $this->Post->isUsernameTaken($data['username']);
+		$isUsernameTaken = $this->Post->isUsernameTaken($data['uname']);
 
 		if(!$isUsernameTaken){
-			if($data['username']!="@"){
+			if($data['uname']!="@"){
 				$res = $this->Post->createUser($data);
 
 				if($res){
@@ -93,7 +94,7 @@ class Gates extends CI_Controller {
 				redirect('/','reresh');
 			}
 		}else{
-			$this->session->set_flashdata("username_taken_msg", "Sorry " . ucfirst($data['first_name']) . ", but the username " . $data['username'] . " is already taken by another blogger.");
+			$this->session->set_flashdata("username_taken_msg", "Sorry " . ucfirst($data['first_name']) . ", but the username " . $data['uname'] . " is already taken by another blogger.");
 			redirect('/','reresh');
 		}
 	}

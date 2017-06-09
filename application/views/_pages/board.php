@@ -76,7 +76,9 @@
           <? if(!empty($posts_data[0]['post_warning'])): ?>
           	<? echo $posts_data[0]['post_warning']; ?>
           <? else: ?>
+          		<? $counter = 0; ?>
           	<? foreach($posts_data as $row): ?>
+          		
           	  <div class="blog-post">
           	  	<? if('@'.$currUser==$viewed_blogger_data[0]['uname']): ?>
           	  		<div class="float-right">
@@ -104,20 +106,23 @@
           	  		<p class="blog-post-meta">
           	  			<small>
           	  				<? echo date('M j Y g:i A', strtotime($row['post_date'])); ?> by <? echo $viewed_blogger_data[0]['uname']; ?>
-          	  			</small><br/>
-          	  			<span class="badge badge-deep-purple-ac3">
-          	  				Adventure
-          	  			</span>
-          	  			<span class="badge badge-warning">
-          	  				Food
-          	  			</span>
+          	  			</small><br/>          	  			
+          	  			<? for($i=0; $i<count($posts_data[$counter]['post_tags']); $i++): ?>
+							<span class="badge badge-<? echo strtolower($posts_data[$counter]['post_tags'][$i]['tag_name']);  ?>">
+	          	  				<? echo stripcslashes($posts_data[$counter]['post_tags'][$i]['tag_emoji']) . " " . $posts_data[$counter]['post_tags'][$i]['tag_name']; ?>
+		          	  		</span>
+          	  			<? endfor; ?>
+      	  				<? $counter++; ?>
           	  		</p>
           	  		<p>
           	  			<? echo $row['post_body']; ?>
 	          	  		<div class="blog-menu-items float-right">
 	          	  			<a href="#!" class="blog-post-menu">
-	          	  				<i class="fa fa-heart-o" aria-hidden="true"></i> <? echo number_format($row['post_likes']); ?>
+	          	  				<i class="fa fa-heart-o" aria-hidden="true"></i>
 	          	  			</a>
+	          	  			<span class="text-muted">
+	          	  				<? echo number_format($row['post_likes']); ?>
+	          	  			</span>
 	          	  		</div>
           	  		</p>
           	  	 </div><!-- ./blog-post -->
@@ -162,9 +167,9 @@
           <div class="sidebar-module">
             <h4>Social Media</h4>
             <ol class="list-unstyled">
-              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
-              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
-              <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
+              <li><a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
+              <li><a href="<? echo $viewed_blogger_data[0]['twitter_url']; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
+              <li><a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
             </ol>
           </div>
           <div class="sidebar-module sidebar-module-inset">

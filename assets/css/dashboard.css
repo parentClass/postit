@@ -45,6 +45,10 @@
   transition: .2s all ease-in;
 }
 
+.text-muted{
+  color: #651fff !important;
+}
+
 .dropdown-toggle::after {
     display:none
 }
@@ -54,8 +58,36 @@
   padding: 1%;
 }
 
-.badge-deep-purple-ac3{
+.badge-unspecified{
+  background-color: #636c72;
+}
+
+.badge-technology{
+  background-color: #0275d8;
+}
+
+.badge-food{
+  background-color: #f0ad4e;
+}
+
+.badge-nature{
+  background-color: #00e676;
+}
+
+.badge-fun{
+  background-color: #ffea00;
+}
+
+.badge-scary{
+  background-color: #d500f9;
+}
+
+.badge-adventure{
   background-color: #651fff;
+}
+
+.badge-photography{
+  background-color: #ff6e40;
 }
 
 /*

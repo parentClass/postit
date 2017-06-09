@@ -70,6 +70,7 @@
                                 <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last name" required autofocus>
                                 <input type="text" name="tagline" id="tagline" class="form-control" placeholder="What describes you?" required autofocus>
                                 <input class="form-control" type="color" value="#651fff" name="color_preference" id="color_preference">
+                                <input type="text" name="font_preference" id="font_preference" class="form-control" placeholder="Your favorite google font" required autofocus>
                                 <hr style="border: 1px white solid;">
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
                                 <input type="email" name="email" id="email" class="form-control" placeholder="Email" required autofocus>

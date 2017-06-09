@@ -49,12 +49,8 @@ class Post extends CI_Model {
 	}
 
 	public function createUser($data){
-		$query = $this->db->query("INSERT INTO postit_users (first_name,last_name,email,uname,pass,tagline,color_preference)
-									VALUES ('". $data['first_name'] ."', '". $data['last_name'] ."', 
-											'". $data['email'] ."', '". $data['username'] ."',
-											'". MD5($data['password']) ."', '". $data['tagline'] . "',
-											'". $data['color_preference'] ."')");
-		if($query){
+		$outcome = $this->db->insert('postit_users',$data);
+		if($outcome){
 			return true;
 		}else{
 			return false;
@@ -62,10 +58,8 @@ class Post extends CI_Model {
 	}
 
 	public function createUserPost($data){
-		$query = $this->db->query("INSERT INTO postit_posts (user_id,title,body,creator_ip) 
-								   VALUES ('". $data['user_id'] ."','". $data['post_title'] ."',
-								   		   '". $data['post_body'] ."', '". $data['creator_ip'] ."')");
-		if($query){
+		$outcome = $this->db->insert('postit_posts',$data);
+		if($outcome){
 			return true;
 		}else{
 			return false;
@@ -73,9 +67,7 @@ class Post extends CI_Model {
 	}
 
 	public function updateUserPost($data){
-		$query = $this->db->query("UPDATE postit_posts
-								   SET title='". $data['post_title'] ."', body='". $data['post_body'] ."'
-								   WHERE id='". $data['id'] ."'");
+		$outcome = $this->db->replace('postit_posts',$data);
 		if($query){
 			return true;
 		}else{
@@ -96,7 +88,7 @@ class Post extends CI_Model {
 
 	public function getUserPosts($username){
 		$user_id = $this->getUserId($username);
-		$query = $this->db->query("SELECT id, user_id, title, body, likes, created_at
+		$query = $this->db->query("SELECT id, user_id, title, body, likes, tags, created_at
 								   FROM postit_posts
 								   WHERE user_id='". $user_id ."'
 								   ORDER BY created_at DESC");
@@ -131,7 +123,10 @@ class Post extends CI_Model {
 					'color_preference' => $row->color_preference,
 					'font_preference' => $row->font_preference,
 					'password' => $row->pass,
-					'user_status' => $row->isNew
+					'user_status' => $row->isNew,
+					'facebook_url' => $row->facebook_url,
+					'twitter_url' => $row->twitter_url,
+					'instagram_url' => $row->instagram_url
 				]);
 			}
 			return json_encode($data);
@@ -153,6 +148,40 @@ class Post extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+
+	public function getPostTags(){
+		$query = $this->db->query("SELECT * FROM postit_tags");
+		return json_decode(json_encode($query->result()),true);
+	}
+
+	public function getCurrentPostTags(&$tag_name){
+		$temp = array();
+		$tags = array();
+
+		// sanitize tag_name
+		$foo = explode(",", json_encode($tag_name));
+		$foo = str_replace("\"", "", $foo);
+
+		// add ' in both start and end of a tag
+		for ($i=0; $i < count($foo); $i++) { 
+			$temp[] = "'".$foo[$i]."'";
+		}
+
+		// assembling things with ,
+		$temp = implode(",", $temp);
+
+
+		$query = $this->db->query("SELECT * FROM postit_tags WHERE tag_name IN (". $temp .")");
+
+		foreach ($query->result() as $row) {
+			array_push($tags, [
+				'tag_name' => $row->tag_name,
+				'tag_emoji' => $row->tag_emoji
+			]);
+		}
+
+		return $tags;
 	}
 
 	public function setUserStatus($user_id){

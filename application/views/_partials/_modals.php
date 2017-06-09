@@ -1,7 +1,6 @@
 
-
 	<!-- Createpost Modal -->
-	<div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="createPostModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -18,7 +17,7 @@
 	      </div>
 	      	<div class="modal-body">
 	      		<? if($logged_blogger_data[0]['isNew']==1): ?>
-	      			<div class="alert alert-success" role="alert"></div>
+	      			<div class="alert alert-success" role="alert">
 	      				<small>
 	      					<strong>Well done!</strong> Let's tell the world that we've arrived!
 	      				</small>
@@ -30,7 +29,7 @@
 	      				</small>
 	      			</div>
 	      		<? endif; ?>
-	      		<form action="#" id="form">
+	      		<form action="" id="form">
 				  <div class="form-group">
 				    <label for="post_title">Post title</label>
 				    <input type="text" name="post_title" class="form-control" id="post_title" aria-describedby="post-title" required>
@@ -39,15 +38,25 @@
 				    <label for="post_body">Post body</label>
 				    <textarea class="form-control" name="post_body" id="post_body" rows="3" required></textarea>
 				  </div>
+				  <div class="form-group">
+				  	Post category <br/><br/>
+				  	<? for($i = 0; $i<count($posts_tags_dataset);$i++): ?>
+				  		<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input" name="post_tag[]" value="<? echo $posts_tags_dataset[$i]['tag_name']; ?>">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">
+						  	<? echo stripcslashes($posts_tags_dataset[$i]['tag_emoji']); ?> <? echo $posts_tags_dataset[$i]['tag_name']; ?>
+						  </span>
+						</label>
+				  	<? endfor; ?>
+				  </div>
 				</form>
 			</div>
 	      	<div class="modal-footer">
-			    <button type="button" onclick="createPost()" id="btn-post" class="btn btn-md btn-success">Post it!</button>
+			    <button type="button" id="btn-post" onclick="createPost()" class="btn btn-md btn-success">Post it!</button>
 			</div>
 	    </div>
 	  </div>
-	</div>
-
 	<!-- Updatepost Modal -->
 	<div class="modal fade" id="updatePostModal" tabindex="-1" role="dialog" aria-labelledby="updatePostModal" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
@@ -61,12 +70,24 @@
 	      	<div class="modal-body">
 	      		<form action="#" id="update-form">
 				  <div class="form-group">
-				    <label for="post-title">Post title</label>
-				    <input type="text" class="form-control" id="post_title" name="post-title" aria-describedby="post-title" required>
+				    <label for="post_title">Post title</label>
+				    <input type="text" class="form-control" id="post_title" name="post_title" aria-describedby="post_title" required>
 				  </div>
 				  <div class="form-group">
-				    <label for="post-body">Post body</label>
-				    <textarea class="form-control" id="post_body" name="post-body" rows="5"></textarea>
+				    <label for="post_body">Post body</label>
+				    <textarea class="form-control" id="post_body" name="post_body" rows="5"></textarea>
+				  </div>
+				  <div class="form-group">
+				  	Post category <br/><br/>
+				  	<? for($i = 0; $i<count($posts_tags_dataset);$i++): ?>
+				  		<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input" name="post_tag[]" value="<? echo $posts_tags_dataset[$i]['tag_name']; ?>">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">
+						  	<? echo stripcslashes($posts_tags_dataset[$i]['tag_emoji']); ?> <? echo $posts_tags_dataset[$i]['tag_name']; ?>
+						  </span>
+						</label>
+				  	<? endfor; ?>
 				  </div>
 				</form>
 			</div>

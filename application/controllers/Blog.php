@@ -60,7 +60,8 @@ class Blog extends CI_Controller {
 			$data['logged_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$this->session->userdata('loggedInAs')),true);
 			$data['viewed_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$blogger_id),true);
 			$data['posts_data'] = $this->displayUserPosts('@'.$blogger_id);
-			$data['page_type'] = "dashboard";
+			$data['posts_tags_dataset'] = $this->Post->getPostTags();
+ 			$data['page_type'] = "dashboard";
 			$this->load->view('_partials/_header',$data);
 			$this->load->view('_pages/board',$data);
 			$this->load->view('_partials/_modals',$data);
@@ -86,38 +87,49 @@ class Blog extends CI_Controller {
 	public function userPost(){
 		$user_id = $this->session->userdata('user_id');
 
+		$post_tags = implode(',', $this->input->post('post_tag'));
+
+		if(empty($post_tags)){
+			$post_tags = "Unspecified";
+		}
+
 		$data = array(
 			'user_id' => $user_id,
-			'post_title' => $this->security->xss_clean($this->input->post('post_title')),
-			'post_body' => $this->security->xss_clean($this->input->post('post_body')),
+			'title' => $this->security->xss_clean($this->input->post('post_title')),
+			'body' => $this->security->xss_clean($this->input->post('post_body')),
+			'tags' => $post_tags,
 			'creator_ip' => $this->input->ip_address()
 		);
 
 		$res = $this->Post->createUserPost($data);
 
 		$this->Post->setUserStatus($user_id);
-
-		if($res){
-			redirect('blog/@'.$this->session->userdata('loggedInAs'),'refresh');
-		}else{
-			$this->session->set_flashdata("error_post","Aww! Something went wrong in posting.");
-			redirect('/','refresh');
-		}
 	}
 
 	public function displayUserPosts($blogger_id){
 		$temp = array();
+		$tags = array();
+
 		$x = $this->Post->getUserPosts($blogger_id);
 
+		$foo = json_decode(json_encode($x),true);
+
+		for ($i=0; $i < count($foo); $i++) { 
+			$tags[] = $foo[$i]['tags'];
+		}
+
+
 		if(!empty($x)){
-			foreach ($x as $row) {
+			for ($i=0; $i < count($foo); $i++) { 
 				array_push($temp, [
-					'id' => $row->id,
-					'user_id' => $row->user_id,
-					'post_title' => $row->title,
-					'post_body' => $row->body,
-					'post_likes' => $row->likes,
-					'post_date' => $row->created_at
+					'id' => $foo[$i]['id'],
+					'user_id' => $foo[$i]['user_id'],
+					'post_title' => $foo[$i]['title'],
+					'post_body' => $foo[$i]['body'],
+					'post_likes' => $foo[$i]['likes'],
+					'post_tags' => $this->Post->getCurrentPostTags($foo[$i]['tags']),
+					'post_tags_count' => count(explode(",", json_encode($foo[$i]['tags']))),
+					'post_date' => $foo[$i]['created_at']
 				]);
 			}
 		}else{
@@ -134,11 +146,15 @@ class Blog extends CI_Controller {
 	}
 
 	public function updateUserPost($user_id,$post_id){
+		$post_tags = implode(',', $this->input->post('post_tag'));
+
+
 		$data = array(
 			'id' => $post_id,
 			'user_id' => $user_id,
-			'post_title' => $this->input->post('post-title'),
-			'post_body' => $this->input->post('post-body')
+			'title' => $this->security->xss_clean($this->input->post('post_title')),
+			'body' => $this->security->xss_clean($this->input->post('post_body')),
+			'tags' => $post_tags
 		);
 
 		$res = $this->Post->updateUserPost($data);
