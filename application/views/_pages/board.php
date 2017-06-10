@@ -17,6 +17,19 @@
           				<i class="fa fa-bandcamp" aria-hidden="true"></i>
           				New Post
           			</a>
+						  <div class="dropdown-divider"></div>
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
+									<i class="fa fa-handshake-o" aria-hidden="true"></i>
+									Buddy Request
+								</a>
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
+									<i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+									Open Letters
+								</a>
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
+									<i class="fa fa-bell-o" aria-hidden="true"></i>
+									Notifications
+								</a>
           		<div class="dropdown-divider"></div>
           			<a href="#!" class="dropdown-item">
           				<i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -65,14 +78,23 @@
         <h5 class="blog-title">
         	<? echo $viewed_blogger_data[0]['first_name'] . " " . $viewed_blogger_data[0]['last_name']; ?>
         </h5>
+				<ul class="list-unstyled text-center">
+					<li><a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="<? echo $viewed_blogger_data[0]['twitter_url']; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+				</ul>
         <p class="lead blog-description">
         	<? echo $viewed_blogger_data[0]['tagline']; ?>
         </p>
+				<div class="sidebar-module sidebar-module-inset">
+					<h4>About</h4>
+					<p>For all the visitors and readers. How are you today?</p>
+				</div>
       </div>
     </div>
-    <div class="container">
+    <div class="container blog-body">
       <div class="row">
-        <div class="col-sm-8 blog-main">
+        <div class="col-sm-12 blog-main">
           <? if(!empty($posts_data[0]['post_warning'])): ?>
           	<? echo $posts_data[0]['post_warning']; ?>
           <? else: ?>
@@ -92,7 +114,7 @@
           	  						<i class="fa fa-pencil" aria-hidden="true"></i>
           	  						 Update Post
           	  					</a>
-												<a href="#!" onclick="deleteUserPost(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="dropdown-item">	
+												<a href="#!" onclick="showDeleteModal(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="dropdown-item">
           	  					<!-- <a href="../blog/deletePost/<? echo $posts_data[0]['user_id'] . "/" . $row['id'] ?>" class="dropdown-item">	 -->
           	  						<i class="fa fa-scissors" aria-hidden="true"></i>
           	  						 Delete Post
@@ -130,55 +152,8 @@
           	<? endforeach; ?>
           <? endif; ?>
         </div><!-- /.blog-main -->
-        <div class="col-sm-3 offset-sm-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>For all the visitors and readers. How are you today?</p>
-          </div>
-          <? if($isLoggedIn): ?>
-          	<? if('@'.$currUser==$viewed_blogger_data[0]['uname']): ?>
-          		<div class="sidebar-module">
-          			<h4>Navigations</h4>
-          			<ol class="list-unstyled">
-          				<li>
-          					<a href="#!">
-          						<i class="fa fa-handshake-o" aria-hidden="true"></i>
-          						Buddy Request
-          						<span class="badge badge-default">2</span>
-          					</a>
-          				</li>
-          				<li>
-          					<a href="#!">
-          						<i class="fa fa-envelope-open-o" aria-hidden="true"></i>
-          						Open Letters
-          						<span class="badge badge-default">3</span>
-          					</a>
-          				</li>
-          				<li>
-          					<a href="#!">
-          						<i class="fa fa-bell-o" aria-hidden="true"></i>
-          						Notifications
-          						<span class="badge badge-default">5</span>
-          					</a>
-          				</li>
-          			</ol>
-          		</div>
-          	<? endif; ?>
-      	  <? endif;?>
-          <div class="sidebar-module">
-            <h4>Social Media</h4>
-            <ol class="list-unstyled">
-              <li><a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
-              <li><a href="<? echo $viewed_blogger_data[0]['twitter_url']; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
-              <li><a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
-            </ol>
-          </div>
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>Postcards</h4>
-            <p>For all the visitors and readers. How are you today?</p>
-          </div>
-        </div><!-- /.blog-sidebar -->
       </div><!-- /.row -->
     </div><!-- /.container -->
 
 		<div id="snackbar">We cannot post a unfilled adventure.</div>
+		<div id="snackbar-delete">Success! I'm about to reload the page in a bit.</div>

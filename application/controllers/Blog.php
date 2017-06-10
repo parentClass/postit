@@ -161,12 +161,20 @@ class Blog extends CI_Controller {
 	}
 
 	public function deleteUserPost($user_id,$post_id){
+		$status = array();
 		$res = $this->Post->deleteUserPost($user_id,$post_id);
 		if($res){
-			redirect('blog/'.$this->session->userdata('loggedInAs'),'refresh');
+			array_push($status,[
+				"status" => 200,
+				"delete_ops" => "success"
+			]);
 		}else{
-			return;
+			array_push($status,[
+				"status" => 200,
+				"delete_ops" => "failed"
+			]);
 		}
+		echo json_encode($status);
 	}
 
 	private function clean($string) {

@@ -138,18 +138,39 @@
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
           }
         }
-        function deleteUserPost(user_id,post_id){
+        function showDeleteModal(user_id,post_id){
+          localStorage.setItem("delete_uid",user_id);
+          localStorage.setItem("delete_pid",post_id);
           $('#delete-confirm-modal').modal('show');
-          //$.ajax({
-          //       url: "<?php echo site_url('blog/deletePost'); ?>/" + user_id + "/" + post_id,
-          //       type: 'DELETE',
-          //       success: function(data){
-          //           location.reload();
-          //       },error: function (jqXHR, textStatus, errorThrown){
-          //           $('#updatePostModal').modal('hide');
-          //           $('#post-error-modal').modal('show');
-          //       }
-          //   });
+        }
+        function deleteUserPost(){
+          var user_id = localStorage.getItem("delete_uid");
+          var post_id = localStorage.getItem("delete_pid");
+          $.ajax({
+                url: "<?php echo site_url('blog/deletePost'); ?>/" + user_id + "/" + post_id,
+                type: 'POST',
+                success: function(data){
+                  var data = JSON.parse(data);
+                  if(data[0]['delete_ops']=="success"){
+                    $('#delete-confirm-modal').modal('hide');
+                    // Get the snackbar DIV
+                    var x = document.getElementById("snackbar-delete")
+                    // Add the "show" class to DIV
+                    x.className = "show";
+                    // After 3 seconds, remove the show class from DIV
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+                    setTimeout(function(){
+                         location.reload();
+                    }, 2000)
+                  }else{
+                    alert("I encountered a problem deleting the post!");
+                  }
+                },error: function (jqXHR, textStatus, errorThrown){
+                  console.log(jqXHR + " " + textStatus + " " + errorThrown);
+                    $('#delete-confirm-modal').modal('hide');
+                    $('#delete-error-modal').modal('show');
+                }
+            });
         }
     </script>
     </body>
