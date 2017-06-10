@@ -9,8 +9,6 @@
 	/*font-family: 'Mukta Vaani', sans-serif !important;*/
 }
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
   background: url('../img/back_gray.png') no-repeat;
 }
 button{
@@ -28,9 +26,8 @@ button{
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
-  margin-bottom: 10px;
   color: #212121;
-  font-size: 15rem;
+  font-size: 8rem;
   font-family: 'Pacifico', sans-serif !important;
 }
 .form-signin .checkbox {
@@ -68,6 +65,7 @@ button{
 }
 .input-group-addon{
 	text-decoration: none !important;
+	width:50px !important;
 }
 .gfont i{
 	-webkit-animation: pulsate 1.5s ease-out;
@@ -190,12 +188,17 @@ iPad 3
 
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3){
 /* Styles */
+	*{
+		padding: 0;
+		margin: 0;
+		overflow: visible !important;
+	}
+
 	body{
-		padding-top: 0px !important;
-		padding-bottom: 500px !important;
+
 	}
 	.form-signin-heading{
-		font-size: 64px !important;
+		font-size: 34px !important;
 	}
 	.alert{
 		width: 100%;

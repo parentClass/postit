@@ -71,17 +71,26 @@
                 <? endif; ?>
         });
         function createPost(){
-            $.ajax({
-                url : "<?php echo site_url('blog/userPost'); ?>",
-                type: 'POST',
-                data: $('#form').serialize(),
-                success: function(data){
-                    location.reload();
-                },error: function (jqXHR, textStatus, errorThrown){
-                    $('#createPostModal').modal('hide');
-                    $('#post-error-modal').modal('show');
-                }
-            });
+            if($('#post_title').val() != "" && $('#post_body').val().length > 0){
+                $.ajax({
+                    url : "<?php echo site_url('blog/userPost'); ?>",
+                    type: 'POST',
+                    data: $('#form').serialize(),
+                    success: function(data){
+                        location.reload();
+                    },error: function (jqXHR, textStatus, errorThrown){
+                        $('#createPostModal').modal('hide');
+                        $('#post-error-modal').modal('show');
+                    }
+                });
+            }else{
+              // Get the snackbar DIV
+              var x = document.getElementById("snackbar")
+              // Add the "show" class to DIV
+              x.className = "show";
+              // After 3 seconds, remove the show class from DIV
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
         }
         function firstStepUpdatePost(user_id,post_id){
             $.ajax({
@@ -108,7 +117,8 @@
             });
         };
         function secondStepUpdatePost(user_id,post_id){
-            $.ajax({
+          if($('#post_title').val() != "" && $('#post_body').val().length > 0){
+              $.ajax({
                 url : "<?php echo site_url('blog/updatePost'); ?>/" + user_id + "/" + post_id,
                 type: 'POST',
                 data: $('#update-form').serialize(),
@@ -119,6 +129,27 @@
                     $('#post-error-modal').modal('show');
                 }
             });
+          }else{
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar")
+            // Add the "show" class to DIV
+            x.className = "show";
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+          }
+        }
+        function deleteUserPost(user_id,post_id){
+          $('#delete-confirm-modal').modal('show');
+          //$.ajax({
+          //       url: "<?php echo site_url('blog/deletePost'); ?>/" + user_id + "/" + post_id,
+          //       type: 'DELETE',
+          //       success: function(data){
+          //           location.reload();
+          //       },error: function (jqXHR, textStatus, errorThrown){
+          //           $('#updatePostModal').modal('hide');
+          //           $('#post-error-modal').modal('show');
+          //       }
+          //   });
         }
     </script>
     </body>

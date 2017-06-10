@@ -92,7 +92,8 @@
           	  						<i class="fa fa-pencil" aria-hidden="true"></i>
           	  						 Update Post
           	  					</a>
-          	  					<a href="../blog/deletePost/<? echo $posts_data[0]['user_id'] . "/" . $row['id'] ?>" class="dropdown-item">
+												<a href="#!" onclick="deleteUserPost(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="dropdown-item">	
+          	  					<!-- <a href="../blog/deletePost/<? echo $posts_data[0]['user_id'] . "/" . $row['id'] ?>" class="dropdown-item">	 -->
           	  						<i class="fa fa-scissors" aria-hidden="true"></i>
           	  						 Delete Post
           	  					</a>
@@ -179,3 +180,5 @@
         </div><!-- /.blog-sidebar -->
       </div><!-- /.row -->
     </div><!-- /.container -->
+
+		<div id="snackbar">We cannot post a unfilled adventure.</div>
