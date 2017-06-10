@@ -141,23 +141,23 @@ class Post extends CI_Model {
 
 	public function getBloggerData($username){
 		$data = [];
-		$query = $this->db->query("SELECT DISTINCT * FROM postit_users WHERE uname='". $username ."'");
+		$query = $this->db->query("SELECT DISTINCT first_name,last_name,uname,email,tagline,color_preference,font_preference,isNew,facebook_url,twitter_url,instagram_url
+			 														FROM postit_users WHERE uname='". $username ."'");
 		if($query->num_rows()==1){
-			$data = $query->result();
-			foreach ($data as $row) {
+			foreach ($query->result() as $row) {
 				array_push($data, [
 					'first_name' => $row->first_name,
 					'last_name' => $row->last_name,
-					'username' => $row->uname,
+					'uname' => $row->uname,
 					'email' => $row->email,
 					'tagline' => $row->tagline,
 					'color_preference' => $row->color_preference,
 					'font_preference' => $row->font_preference,
-					'password' => $row->pass,
 					'user_status' => $row->isNew,
 					'facebook_url' => $row->facebook_url,
 					'twitter_url' => $row->twitter_url,
-					'instagram_url' => $row->instagram_url
+					'instagram_url' => $row->instagram_url,
+					'isNew' => $row->isNew
 				]);
 			}
 			return json_encode($data);

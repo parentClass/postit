@@ -114,8 +114,8 @@
              <? if('@'.$currUser!=$viewed_blogger_data[0]['uname']): ?>
 							 <li>
 								 <div class="btn-group uol" role="group" aria-label="User Operation Links">
-									 <a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" class="btn btn-sm btn-outline-default" target="_blank"><i class="fa fa-user-plus" aria-hidden="true"></i>Send Buddy Request</a>
-									 <a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" class="btn btn-sm btn-outline-default" target="_blank"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
+									 <a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-user-plus" aria-hidden="true"></i>Send Buddy Request</a>
+									 <a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
 								 </div>
 							 </li>
 					 		<? else: ?>
