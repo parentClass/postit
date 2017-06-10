@@ -114,6 +114,16 @@ class Post extends CI_Model {
 		return json_encode($outcome);
 	}
 
+	public function countUserLikes($username){
+		$user_id = $this->getUserId($username);
+		$query = $this->db->query("SELECT likes FROM postit_posts WHERE user_id='". $user_id ."'");
+		if($query->num_rows()>0){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
 	public function getUserPostsByUserIdAndPostId($user_id,$post_id){
 		$this->db->from("postit_posts");
         $this->db->where('user_id',$user_id);

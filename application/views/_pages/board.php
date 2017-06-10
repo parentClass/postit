@@ -122,7 +122,10 @@
 								<li>
 									<div class="btn-group user-stats" role="group" aria-label="User Stats">
  									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i>0</a>
- 									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-sticky-note-o" aria-hidden="true"></i><? echo count($user_post_count); ?></a>
+									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-heart-o" aria-hidden="true"></i>
+										 <? echo number_format($user_likes_count); ?>
+									 </a>
+ 									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-sticky-note-o" aria-hidden="true"></i><? echo number_format(count($user_post_count)); ?></a>
  								 </div>
 							 </li>
                <? endif; ?>

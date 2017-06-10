@@ -28,7 +28,7 @@ class Blog extends CI_Controller {
     if($method == "OPTIONS") {
         die();
     }
-		
+
 		$this->load->database();
 		$this->load->model('Post');
 		$this->load->library('session');
@@ -69,9 +69,17 @@ class Blog extends CI_Controller {
 			$data['logged_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$this->session->userdata('loggedInAs')),true);
 			$data['viewed_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$blogger_id),true);
 			$data['user_post_count'] = json_decode($this->Post->countUserPosts('@'.$this->session->userdata('loggedInAs')),true);
+			$data['user_likes_count'] = 0;
 			$data['posts_data'] = $this->displayUserPosts('@'.$blogger_id);
 			$data['posts_tags_dataset'] = $this->Post->getPostTags();
  			$data['page_type'] = "dashboard";
+
+			$temp = json_decode(json_encode($this->Post->countUserLikes('@'.$this->session->userdata('loggedInAs'))),true);
+
+			foreach ($temp as $row) {
+				$data['user_likes_count'] += $row['likes'];
+			}
+
 			$this->load->view('_partials/_header',$data);
 			$this->load->view('_pages/board',$data);
 			$this->load->view('_partials/_modals',$data);
