@@ -187,4 +187,4 @@
     </div><!-- /.container -->
 
 		<div id="snackbar">We cannot post a unfilled adventure.</div>
-		<div id="snackbar-delete">Success! I'm about to reload the page in a bit.</div>
+		<div id="snackbar-success">Success! I'm about to reload the page in a bit.</div>

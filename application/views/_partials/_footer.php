@@ -77,7 +77,16 @@
                     type: 'POST',
                     data: $('#form').serialize(),
                     success: function(data){
-                        location.reload();
+                      $('#createPostModal').modal('hide');
+                      // Get the snackbar DIV
+                      var x = document.getElementById("snackbar-success")
+                      // Add the "show" class to DIV
+                      x.className = "show";
+                      // After 3 seconds, remove the show class from DIV
+                      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+                      setTimeout(function(){
+                           location.reload();
+                      }, 2000)
                     },error: function (jqXHR, textStatus, errorThrown){
                         $('#createPostModal').modal('hide');
                         $('#post-error-modal').modal('show');
@@ -154,7 +163,7 @@
                   if(data[0]['delete_ops']=="success"){
                     $('#delete-confirm-modal').modal('hide');
                     // Get the snackbar DIV
-                    var x = document.getElementById("snackbar-delete")
+                    var x = document.getElementById("snackbar-success")
                     // Add the "show" class to DIV
                     x.className = "show";
                     // After 3 seconds, remove the show class from DIV
