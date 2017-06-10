@@ -29,7 +29,7 @@
 	      				</small>
 	      			</div>
 	      		<? endif; ?>
-	      		<form action="" id="form">
+	      		<form action="" id="create-form">
 				  <div class="form-group cm_pt">
 				    <label class="form-control-label" for="post_title">Post title</label>
 				    <input type="text" name="post_title" class="form-control" id="post_title" aria-describedby="post-title" required>
@@ -151,6 +151,25 @@
 	      <div class="modal-footer justify-content-center">
 	        <a href="#!" onclick="deleteUserPost()" class="btn btn-md btn-outline-danger">Yes</a>
 	        <a href="#!" class="btn btn-md btn-outline-primary" data-dismiss="modal">No</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="operations-modal">
+	  <div class="modal-dialog modal-lg operations-dialog" role="document">
+	    <div class="modal-content operations-dialog-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Notification</h5>
+	      </div>
+	      <div class="modal-body text-center operations-modal-body">
+	        <p>What should we do with this post?</p>
+	      </div>
+	      <div class="modal-footer justify-content-center">
+					<a href="#!" onclick="showDeleteModal()" class="btn btn-md btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Post</a>
+					<a href="#!" onclick="firstStepUpdatePost()" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update Post</a>
+					<a href="#!" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-bookmark-o" aria-hidden="true"></i> Bookmark Post</a>
+					<a href="#!" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-flag-o" aria-hidden="true"></i> Report Post</a>
 	      </div>
 	    </div>
 	  </div>

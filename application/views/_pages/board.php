@@ -136,21 +136,10 @@
           	  <div class="blog-post">
           	  	<? if('@'.$currUser==$viewed_blogger_data[0]['uname']): ?>
           	  		<div class="float-right">
-          	  			<div class="dropdown">
-          	  				<a href="#!" class="dropdown-toggle blog-post-menu" id="dropdownMenuLink"
-          	  						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	  			<div class="menu">
+          	  				<a href="#!" onclick="specifyPost(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="blog-post-menu" data-toggle="modal" data-target="#operations-modal">
           	  					<i class="fa fa-angle-down" aria-hidden="true"></i>
           	  				</a>
-          	  				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          	  					<a href="#!" class="dropdown-item" onclick="firstStepUpdatePost(<? echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)">
-          	  						<i class="fa fa-pencil" aria-hidden="true"></i>
-          	  						 Update Post
-          	  					</a>
-												<a href="#!" onclick="showDeleteModal(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="dropdown-item">
-          	  						<i class="fa fa-scissors" aria-hidden="true"></i>
-          	  						 Delete Post
-          	  					</a>
-          	  				</div>
           	  			</div> <!-- ./dropdown -->
           	  		</div> <!-- ./float-right -->
           	  	<? endif; ?>

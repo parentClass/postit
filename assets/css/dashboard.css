@@ -96,7 +96,7 @@
 }
 
 .delete-dialog{
-	margin-top: 30%;
+	margin-top: 20%;
 }
 
 .uol a{
@@ -114,6 +114,14 @@
 
 .card{
 	border-color: transparent !important;
+}
+
+.operations-dialog{
+	margin-top: 20%;
+}
+
+.operations-dialog-content{
+	width: 100%;
 }
 
 /*
