@@ -114,8 +114,23 @@
              <? if('@'.$currUser!=$viewed_blogger_data[0]['uname']): ?>
 							 <li>
 								 <div class="btn-group uol" role="group" aria-label="User Operation Links">
-									 <a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-user-plus" aria-hidden="true"></i>Send Buddy Request</a>
-									 <a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
+								  <? if(empty($buddy_status)): ?>
+									 <a href="#!" onclick="sendBuddyRequest(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy">
+										 <i class="fa fa-user-plus" aria-hidden="true"></i>
+										 Send Buddy Request
+									 </a>
+								 <? elseif($buddy_status==1): ?>
+										 <a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#cancel-buddy-modal">
+											<i class="fa fa-check" aria-hidden="true"></i>
+											Buddy Request Sent
+										</a>
+								 <? elseif($buddy_status==2): ?>
+											 <a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#remove-buddy-modal">
+												<i class="fa fa-times" aria-hidden="true"></i>
+												Buddy
+											</a>
+								 	 <? endif; ?>
+									 <a href="#!" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
 								 </div>
 							 </li>
 					 		<? else: ?>
@@ -190,3 +205,4 @@
 
 		<div id="snackbar">We cannot post a unfilled adventure.</div>
 		<div id="snackbar-success">Success! I'm about to reload the page in a bit.</div>
+		<div id="snackbar-danger">Failed! I encountered a problem doing the request.</div>

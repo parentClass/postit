@@ -194,13 +194,86 @@
     				},error: function (jqXHR, textStatus, errorThrown){
     					console.log(jqXHR + " " + textStatus + " " + errorThrown);
     						$('#delete-confirm-modal').modal('hide');
-    						$('#delete-error-modal').modal('show');
+                // Get the snackbar DIV
+    						var x = document.getElementById("snackbar-danger")
+    						// Add the "show" class to DIV
+    						x.className = "show";
+    						// After 3 seconds, remove the show class from DIV
+    						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
     				}
     		});
     }
     function specifyPost(user_id,post_id){
       localStorage.setItem("user_id",user_id);
       localStorage.setItem("post_id",post_id);
+    }
+    function specifyBuddy(uo_id,ut_id){
+      localStorage.setItem("uo_id",uo_id);
+      localStorage.setItem("ut_id",ut_id);
+    }
+    function sendBuddyRequest(uo,ut){
+      $('.btn-buddy').html("<i class='fa fa-check' aria-hidden='true'></i> Buddy Request Sent!");
+      $.ajax({
+    				url: "<?php echo site_url('blog/addBuddy'); ?>/" + uo + "/" + ut,
+    				type: 'POST',
+    				success: function(data){
+
+    				},error: function (jqXHR, textStatus, errorThrown){
+    					console.log(jqXHR + " " + textStatus + " " + errorThrown);
+                // Get the snackbar DIV
+    						var x = document.getElementById("snackbar-danger")
+    						// Add the "show" class to DIV
+    						x.className = "show";
+    						// After 3 seconds, remove the show class from DIV
+    						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    				}
+    		});
+    }
+    function cancelBuddyRequest(){
+      var uo = localStorage.getItem("uo_id");
+      var ut = localStorage.getItem("ut_id");
+      $('.btn-buddy').html("<i class='fa fa-user-plus' aria-hidden='true'></i> Send Buddy Request");
+      $.ajax({
+    				url: "<?php echo site_url('blog/cancelBuddy'); ?>/" + uo + "/" + ut,
+    				type: 'POST',
+    				success: function(data){
+              $("#cancel-buddy-modal").modal('hide');
+              setTimeout(function(){
+                   location.reload();
+              }, 2000)
+    				},error: function (jqXHR, textStatus, errorThrown){
+    					console.log(jqXHR + " " + textStatus + " " + errorThrown);
+                // Get the snackbar DIV
+    						var x = document.getElementById("snackbar-danger")
+    						// Add the "show" class to DIV
+    						x.className = "show";
+    						// After 3 seconds, remove the show class from DIV
+    						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    				}
+    		});
+    }
+    function removeBuddy(){
+      var uo = localStorage.getItem("uo_id");
+      var ut = localStorage.getItem("ut_id");
+      $('.btn-buddy').html("<i class='fa fa-user-plus' aria-hidden='true'></i> Send Buddy Request");
+      $.ajax({
+    				url: "<?php echo site_url('blog/removeBuddy'); ?>/" + uo + "/" + ut,
+    				type: 'POST',
+    				success: function(data){
+              $("#remove-buddy-modal").modal('hide');
+              setTimeout(function(){
+                   location.reload();
+              }, 2000)
+    				},error: function (jqXHR, textStatus, errorThrown){
+    					console.log(jqXHR + " " + textStatus + " " + errorThrown);
+                // Get the snackbar DIV
+    						var x = document.getElementById("snackbar-danger")
+    						// Add the "show" class to DIV
+    						x.className = "show";
+    						// After 3 seconds, remove the show class from DIV
+    						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    				}
+    		});
     }
   </script>
     </body>

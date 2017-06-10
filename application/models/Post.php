@@ -16,6 +16,52 @@ class Post extends CI_Model {
 		$this->load->database();
 	}
 
+	public function addBuddyUser($user_one,$user_two){
+		$uo_uname = $this->getUserName($user_one);
+		$ut_uname = $this->getUserName($user_two);
+
+		$data = array(
+					"postit_requestee_uid"=> $user_one,
+					"postit_requestee_username"=> $uo_uname,
+					"postit_requester_uid"=> $user_two,
+					"postit_requester_username"=>	 $ut_uname
+		); //uid,username, uid,username
+
+		$outcome = $this->db->insert('postit_buddy_requests',$data);
+		if($outcome){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function removeBuddyUser($user_one,$user_two){
+		$query = $this->db->query("DELETE FROM postit_buddy_requests
+								   WHERE postit_requestee_uid='". $user_one ."'
+								   AND postit_requester_uid='". $user_two ."'");
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function getBuddyStatus($user_one,$user_two){
+		$status = [];
+		$query = $this->db->query("SELECT DISTINCT status
+									 FROM postit_buddy_requests
+									 WHERE postit_requestee_username='". $user_one ."'
+									 AND postit_requester_username='". $user_two ."'");
+		if($query->num_rows()>0){
+			foreach ($query->result() as $row) {
+				$status = $row->status;
+			}
+			return $status;
+		}else{
+			return false;
+		}
+	}
+
 	public function checkUser($data){
 		$query = $this->db->query("SELECT user_id, uname, first_name, last_login_from
 								   FROM postit_users
@@ -94,6 +140,21 @@ class Post extends CI_Model {
 		}
 	}
 
+	public function getUserName($uid){
+		$uname = [];
+		$query = $this->db->query("SELECT DISTINCT uname
+									 FROM postit_users
+									 WHERE user_id='". $uid ."'");
+		if($query->num_rows()>0){
+			foreach ($query->result() as $row) {
+				$uname = $row->uname;
+			}
+			return $uname;
+		}else{
+			return false;
+		}
+	}
+
 	public function getUserPosts($username){
 		$user_id = $this->getUserId($username);
 		$query = $this->db->query("SELECT id, user_id, title, body, likes, tags, created_at
@@ -141,11 +202,12 @@ class Post extends CI_Model {
 
 	public function getBloggerData($username){
 		$data = [];
-		$query = $this->db->query("SELECT DISTINCT first_name,last_name,uname,email,tagline,color_preference,font_preference,isNew,facebook_url,twitter_url,instagram_url
+		$query = $this->db->query("SELECT DISTINCT user_id,first_name,last_name,uname,email,tagline,color_preference,font_preference,isNew,facebook_url,twitter_url,instagram_url
 			 														FROM postit_users WHERE uname='". $username ."'");
 		if($query->num_rows()==1){
 			foreach ($query->result() as $row) {
 				array_push($data, [
+					'user_id' => $row->user_id,
 					'first_name' => $row->first_name,
 					'last_name' => $row->last_name,
 					'uname' => $row->uname,

@@ -202,3 +202,37 @@
 	    </div>
 	  </div>
 	</div>
+
+	<div class="modal fade" id="remove-buddy-modal">
+	  <div class="modal-dialog modal-lg remove-buddy-dialog" role="document">
+	    <div class="modal-content remove-buddy-dialog-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Notification</h5>
+	      </div>
+	      <div class="modal-body text-center operations-modal-body">
+	        <p>Are you sure you want to remove connection with <? echo $viewed_blogger_data[0]['uname']; ?>?</p>
+	      </div>
+				<div class="modal-footer justify-content-center">
+	        <a href="#!" onclick="removeBuddy()" class="btn btn-md btn-outline-danger">Yes</a>
+	        <a href="#!" class="btn btn-md btn-outline-primary" data-dismiss="modal">No</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="cancel-buddy-modal">
+	  <div class="modal-dialog modal-lg cancel-buddy-dialog" role="document">
+	    <div class="modal-content cancel-buddy-dialog-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Notification</h5>
+	      </div>
+	      <div class="modal-body text-center operations-modal-body">
+	        <p>Are you sure you want to cancel the buddy request sent to <? echo $viewed_blogger_data[0]['uname']; ?>?</p>
+	      </div>
+				<div class="modal-footer justify-content-center">
+	        <a href="#!" onclick="cancelBuddyRequest()" class="btn btn-md btn-outline-danger">Yes</a>
+	        <a href="#!" class="btn btn-md btn-outline-primary" data-dismiss="modal">No</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
