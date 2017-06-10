@@ -124,6 +124,12 @@ class Post extends CI_Model {
 		}
 	}
 
+	public function countUserBuddy($username){
+		$query = $this->db->query("SELECT buddy_count FROM postit_users WHERE uname='". $username ."'");
+		$outcome = $query->result();
+		return json_encode($outcome[0]);
+	}
+
 	public function getUserPostsByUserIdAndPostId($user_id,$post_id){
 		$this->db->from("postit_posts");
         $this->db->where('user_id',$user_id);
