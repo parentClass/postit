@@ -12,6 +12,10 @@
           				<? echo $logged_blogger_data[0]['first_name'] . " " . $logged_blogger_data[0]['last_name'] ?><br/>
           				View Profile
           			</a>
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#search-modal">
+									<i class="fa fa-search" aria-hidden="true"></i>
+									Search
+								</a>
           		<div class="dropdown-divider"></div>
           			<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
           				<i class="fa fa-bandcamp" aria-hidden="true"></i>
@@ -25,6 +29,10 @@
 								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#openLetterModal">
 									<i class="fa fa-envelope-open-o" aria-hidden="true"></i>
 									Open Letters
+								</a>
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#notifModal">
+									<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+									Bookmarked Post
 								</a>
 								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#notifModal">
 									<i class="fa fa-bell-o" aria-hidden="true"></i>
@@ -134,7 +142,6 @@
           	<? foreach($posts_data as $row): ?>
 
           	  <div class="blog-post">
-          	  	<? if('@'.$currUser==$viewed_blogger_data[0]['uname']): ?>
           	  		<div class="float-right">
           	  			<div class="menu">
           	  				<a href="#!" onclick="specifyPost(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="blog-post-menu" data-toggle="modal" data-target="#operations-modal">
@@ -142,7 +149,6 @@
           	  				</a>
           	  			</div> <!-- ./dropdown -->
           	  		</div> <!-- ./float-right -->
-          	  	<? endif; ?>
           	  		<h2 class="blog-post-title">
           	  			<? echo $row['post_title']; ?>
           	  		</h2>

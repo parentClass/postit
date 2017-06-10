@@ -25,7 +25,7 @@
 	      		<? else: ?>
 	      			<div class="alert alert-warning" role="alert">
 	      				<small>
-	      					<strong>Show them how free you are <? echo $logged_blogger_data[0]['first_name']; ?>!</strong>
+	      					<strong>How's the adventure <? echo $logged_blogger_data[0]['first_name']; ?>?</strong>
 	      				</small>
 	      			</div>
 	      		<? endif; ?>
@@ -166,10 +166,38 @@
 	        <p>What should we do with this post?</p>
 	      </div>
 	      <div class="modal-footer justify-content-center">
-					<a href="#!" onclick="showDeleteModal()" class="btn btn-md btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Post</a>
-					<a href="#!" onclick="firstStepUpdatePost()" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update Post</a>
-					<a href="#!" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-bookmark-o" aria-hidden="true"></i> Bookmark Post</a>
-					<a href="#!" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-flag-o" aria-hidden="true"></i> Report Post</a>
+					<? if('@'.$currUser!=$viewed_blogger_data[0]['uname']): ?>
+						<a href="#!" onclick="#!" class="btn btn-md btn-default"><i class="fa fa-bookmark" aria-hidden="true"></i> Bookmark Post</a>
+						<a href="#!" onclick="#!" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-flag" aria-hidden="true"></i> Report Post</a>
+					<? else: ?>
+						<a href="#!" onclick="showDeleteModal()" class="btn btn-md btn-default"><i class="fa fa-trash" aria-hidden="true"></i> Delete Post</a>
+						<a href="#!" onclick="firstStepUpdatePost()" class="btn btn-md btn-default" data-dismiss="modal"><i class="fa fa-pencil-square" aria-hidden="true"></i> Update Post</a>
+					<? endif; ?>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="search-modal">
+	  <div class="modal-dialog search-dialog" role="document">
+	    <div class="modal-content search-dialog-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Notification</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          	<span aria-hidden="true">&times;</span>
+        	</button>
+	      </div>
+	      <div class="modal-body text-center delete-modal-body">
+	        <form>
+						<div class="form-group">
+					    <label for="search-input">What to search?</label>
+					    <input type="text" class="form-control" class="search-input">
+					    <small id="emailHelp" class="form-text text-muted">You can search for a post or different user<br/>and create connections across the world!</small>
+					  </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer justify-content-center">
+	        <a href="#!" onclick="" class="btn btn-md btn-outline-default"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
 	      </div>
 	    </div>
 	  </div>

@@ -116,12 +116,16 @@
 	border-color: transparent !important;
 }
 
-.operations-dialog{
+.operations-dialog,.search-dialog{
 	margin-top: 20%;
 }
 
 .operations-dialog-content{
 	width: 100%;
+}
+
+#search-modal{
+	background-color: #212121;
 }
 
 /*
