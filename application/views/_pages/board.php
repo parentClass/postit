@@ -18,15 +18,15 @@
           				New Post
           			</a>
 						  <div class="dropdown-divider"></div>
-								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#buddyRequestModal">
 									<i class="fa fa-handshake-o" aria-hidden="true"></i>
 									Buddy Request
 								</a>
-								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#openLetterModal">
 									<i class="fa fa-envelope-open-o" aria-hidden="true"></i>
 									Open Letters
 								</a>
-								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#createPostModal">
+								<a href="#!" class="dropdown-item" data-toggle="modal" data-target="#notifModal">
 									<i class="fa fa-bell-o" aria-hidden="true"></i>
 									Notifications
 								</a>
@@ -75,20 +75,52 @@
       			</strong>
       		</div>
       	<? endif; ?>
-        <h5 class="blog-title">
-        	<? echo $viewed_blogger_data[0]['first_name'] . " " . $viewed_blogger_data[0]['last_name']; ?>
-        </h5>
-				<ul class="list-unstyled text-center">
-					<li><a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-					<li><a href="<? echo $viewed_blogger_data[0]['twitter_url']; ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					<li><a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-				</ul>
-        <p class="lead blog-description">
-        	<? echo $viewed_blogger_data[0]['tagline']; ?>
-        </p>
-				<div class="sidebar-module sidebar-module-inset">
-					<h4>About</h4>
-					<p>For all the visitors and readers. How are you today?</p>
+				<div class="card text-center">
+				  <div class="card-header">
+						<img src="../assets/img/postit_113x113.png" alt="Postit User Avatar" class="img-thumbnail" style="width: 100px; height: 100px;border-radius:50%;">
+						<h5 class="blog-title">
+		        	<? echo $viewed_blogger_data[0]['first_name'] . " " . $viewed_blogger_data[0]['last_name']; ?>
+		        </h5>
+				  </div>
+				  <div class="card-block">
+				    <h4 class="card-title">
+							<p class="lead blog-description">
+			        	<? echo $viewed_blogger_data[0]['tagline']; ?>
+			        </p>
+						</h4>
+				    <p class="card-text">
+							<ul class="list-unstyled text-center">
+								<li>
+									<div class="btn-group" role="group" aria-label="Social Media Links">
+										<a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" class="btn btn-sm btn-outline-primary" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a>
+										<a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" class="btn btn-sm btn-outline-primary" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+										<a href="<? echo $viewed_blogger_data[0]['twitter_url']; ?>" class="btn btn-sm btn-outline-primary" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+									</div>
+								</li>
+							</ul>
+						</p>
+				  </div>
+				  <div class="card-footer">
+						<ul class="list-unstyled text-center">
+            <? if($isLoggedIn): ?>
+             <? if('@'.$currUser!=$viewed_blogger_data[0]['uname']): ?>
+							 <li>
+								 <div class="btn-group uol" role="group" aria-label="User Operation Links">
+									 <a href="<? echo $viewed_blogger_data[0]['facebook_url']; ?>" class="btn btn-sm btn-outline-default" target="_blank"><i class="fa fa-user-plus" aria-hidden="true"></i>Send Buddy Request</a>
+									 <a href="<? echo $viewed_blogger_data[0]['instagram_url']; ?>" class="btn btn-sm btn-outline-default" target="_blank"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
+								 </div>
+							 </li>
+					 		<? else: ?>
+								<li>
+									<div class="btn-group user-stats" role="group" aria-label="User Stats">
+ 									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i>0</a>
+ 									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-sticky-note-o" aria-hidden="true"></i><? echo count($user_post_count); ?></a>
+ 								 </div>
+							 </li>
+               <? endif; ?>
+						 <? endif; ?>
+ 					 </ul>
+				  </div>
 				</div>
       </div>
     </div>
@@ -115,7 +147,6 @@
           	  						 Update Post
           	  					</a>
 												<a href="#!" onclick="showDeleteModal(<?php echo $posts_data[0]['user_id'] . "," . $row['id'] ?>)" class="dropdown-item">
-          	  					<!-- <a href="../blog/deletePost/<? echo $posts_data[0]['user_id'] . "/" . $row['id'] ?>" class="dropdown-item">	 -->
           	  						<i class="fa fa-scissors" aria-hidden="true"></i>
           	  						 Delete Post
           	  					</a>

@@ -9,7 +9,7 @@ class Post extends CI_Model {
 	}
 
 	public function checkUser($data){
-		$query = $this->db->query("SELECT user_id, uname, first_name, last_login_from 
+		$query = $this->db->query("SELECT user_id, uname, first_name, last_login_from
 								   FROM postit_users
 								   WHERE uname='".$data['username']."'
 								   AND pass='".MD5($data['password'])."'");
@@ -32,7 +32,7 @@ class Post extends CI_Model {
 	}
 
 	public function countUsers(){
-		$query = $this->db->query("SELECT user_id 
+		$query = $this->db->query("SELECT user_id
 								   FROM postit_users");
 		return count($query);
 	}
@@ -99,12 +99,19 @@ class Post extends CI_Model {
 		}
 	}
 
+	public function countUserPosts($username){
+		$user_id = $this->getUserId($username);
+		$query = $this->db->query("SELECT id FROM postit_posts WHERE user_id='". $user_id ."'");
+		$outcome = $query->result();
+		return json_encode($outcome);
+	}
+
 	public function getUserPostsByUserIdAndPostId($user_id,$post_id){
 		$this->db->from("postit_posts");
         $this->db->where('user_id',$user_id);
         $this->db->where('id',$post_id);
         $query = $this->db->get();
- 
+
         return $query->row();
 	}
 
@@ -164,7 +171,7 @@ class Post extends CI_Model {
 		$foo = str_replace("\"", "", $foo);
 
 		// add ' in both start and end of a tag
-		for ($i=0; $i < count($foo); $i++) { 
+		for ($i=0; $i < count($foo); $i++) {
 			$temp[] = "'".$foo[$i]."'";
 		}
 

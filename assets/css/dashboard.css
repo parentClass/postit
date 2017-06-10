@@ -99,11 +99,16 @@
 	margin-top: 30%;
 }
 
-.list-unstyled li{
-	display: inline;
+.uol a{
+	color: #212121;
+	transition: .2s all ease-in;
 }
 
-.list-unstyled li a{
+.uol a:hover{
+	color: #651fff;
+}
+
+.user-stats a{
 	color: #212121;
 }
 
