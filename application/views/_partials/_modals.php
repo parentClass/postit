@@ -204,7 +204,7 @@
 	</div>
 
 	<div class="modal fade" id="remove-buddy-modal">
-	  <div class="modal-dialog modal-lg remove-buddy-dialog" role="document">
+	  <div class="modal-dialog modal-md remove-buddy-dialog" role="document">
 	    <div class="modal-content remove-buddy-dialog-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title">Notification</h5>
@@ -221,7 +221,7 @@
 	</div>
 
 	<div class="modal fade" id="cancel-buddy-modal">
-	  <div class="modal-dialog modal-lg cancel-buddy-dialog" role="document">
+	  <div class="modal-dialog modal-md cancel-buddy-dialog" role="document">
 	    <div class="modal-content cancel-buddy-dialog-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title">Notification</h5>
@@ -232,6 +232,36 @@
 				<div class="modal-footer justify-content-center">
 	        <a href="#!" onclick="cancelBuddyRequest()" class="btn btn-md btn-outline-danger">Yes</a>
 	        <a href="#!" class="btn btn-md btn-outline-primary" data-dismiss="modal">No</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="buddyRequestModal">
+	  <div class="modal-dialog modal-lg buddyRequest-dialog" role="document">
+	    <div class="modal-content buddyRequest-dialog-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Buddy Request</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          	<span aria-hidden="true">&times;</span>
+        	</button>
+	      </div>
+	      <div class="modal-body text-center operations-modal-body">
+					<div class="card-group">
+						<? for($i = 0; $i < 10; $i++): ?>
+						<div class="card" style="width: 20rem;">
+							<img class="card-img-top img-thumbnail" src="../assets/img/back.jpeg" alt="Card image cap">
+							<div class="card-block">
+								<h4 class="card-title">Card title</h4>
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								<a href="#" class="btn btn-sm btn-default">
+									<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+									Accept Request
+								</a>
+							</div>
+						</div>
+						<? endfor; ?>
+					</div>
 	      </div>
 	    </div>
 	  </div>

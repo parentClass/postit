@@ -21,10 +21,10 @@ class Post extends CI_Model {
 		$ut_uname = $this->getUserName($user_two);
 
 		$data = array(
-					"postit_requestee_uid"=> $user_one,
-					"postit_requestee_username"=> $uo_uname,
-					"postit_requester_uid"=> $user_two,
-					"postit_requester_username"=>	 $ut_uname
+					"postit_requestee_uid"=> $user_two,
+					"postit_requestee_username"=> $ut_uname,
+					"postit_requester_uid"=> $user_one,
+					"postit_requester_username"=>	 $uo_uname
 		); //uid,username, uid,username
 
 		$outcome = $this->db->insert('postit_buddy_requests',$data);
@@ -46,12 +46,30 @@ class Post extends CI_Model {
 		}
 	}
 
+	public function getBuddyRequests($uid){
+		$status = [];
+		$query = $this->db->query("SELECT DISTINCT postit_requester_username, status
+									 FROM postit_buddy_requests
+									 WHERE postit_requestee_username='". $uid ."'");
+		if($query->num_rows()>0){
+			foreach ($query->result() as $row) {
+				array_push($status,[
+					"requester" => $row->postit_requester_username,
+					"status" => $row->status
+				]);
+			}
+			return $status;
+		}else{
+			return false;
+		}
+	}
+
 	public function getBuddyStatus($user_one,$user_two){
 		$status = [];
 		$query = $this->db->query("SELECT DISTINCT status
 									 FROM postit_buddy_requests
-									 WHERE postit_requestee_username='". $user_one ."'
-									 AND postit_requester_username='". $user_two ."'");
+									 WHERE postit_requestee_username='". $user_two ."'
+									 AND postit_requester_username='". $user_one ."'");
 		if($query->num_rows()>0){
 			foreach ($query->result() as $row) {
 				$status = $row->status;
