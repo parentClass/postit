@@ -1,4 +1,5 @@
-![Postit!](https://github.com/parentClass/postit/blob/master/assets/img/postit_113x113.png "Post-it!")  - # Post-it
+![Postit!](https://github.com/parentClass/postit/blob/master/assets/img/postit_113x113.png "Post-it!")  
+# Post-it
 
 Another soon to be social media platform for randomness and adventure.
 
