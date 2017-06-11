@@ -21,10 +21,10 @@ class Post extends CI_Model {
 		$ut_uname = $this->getUserName($user_two);
 
 		$data = array(
-					"postit_requestee_uid"=> $user_two,
-					"postit_requestee_username"=> $ut_uname,
-					"postit_requester_uid"=> $user_one,
-					"postit_requester_username"=>	 $uo_uname
+					"requestee_uid"=> $user_two,
+					"requestee_username"=> $ut_uname,
+					"requester_uid"=> $user_one,
+					"requester_username"=>	 $uo_uname
 		); //uid,username, uid,username
 
 		$outcome = $this->db->insert('postit_buddy_requests',$data);
@@ -36,20 +36,41 @@ class Post extends CI_Model {
 	}
 
 	public function acceptBuddyRequest($user_one,$user_two){
-		$query = $this->db->query("UPDATE postit_buddy_requests
-								   SET status='2'
-								   WHERE postit_requestee_uid='". $user_one ."' AND postit_requester_uid='". $user_two ."'");
-		if($query){
-			$this->updateBuddyCount($user_one);
+		$uo_uname = $this->getUserName($user_one);
+		$ut_uname = $this->getUserName($user_two);
+
+		$outcome = $this->removeBuddyUserRequest($user_one,$user_two);
+
+		if($outcome){
+			$query = $this->db->query("INSERT INTO postit_buddy_list (requestee_uid,requestee_username,requester_uid,requester_username)
+																   VALUES ('".$user_one."','".$uo_uname."','".$user_two."','".$ut_uname."') ");
+			if($query){
+				$this->updateBuddyCount($user_one,$user_two);
+			}else{
+				return false;
+			}
 		}else{
 			return false;
 		}
 	}
 
-	public function updateBuddyCount($uid){
+	public function updateBuddyCount($uo_id,$ut_id){
 		$query = $this->db->query("UPDATE postit_users
-								   SET buddy_count= buddy_count + 1
-								   WHERE user_id='". $uid ."'");
+								   SET buddy_count = buddy_count + 1
+									 WHERE user_id IN ('".$uo_id."','".$ut_id."')");
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function removeBuddyUserRequest($user_one,$user_two){
+		$query = $this->db->query("DELETE FROM postit_buddy_requests
+								   WHERE requestee_uid='". $user_one ."'
+								   AND requester_uid='". $user_two ."' 
+									 OR requestee_uid='". $user_two ."'
+								   AND requester_uid='". $user_one ."' ");
 		if($query){
 			return true;
 		}else{
@@ -58,9 +79,9 @@ class Post extends CI_Model {
 	}
 
 	public function removeBuddyUser($user_one,$user_two){
-		$query = $this->db->query("DELETE FROM postit_buddy_requests
-								   WHERE postit_requestee_uid='". $user_one ."'
-								   AND postit_requester_uid='". $user_two ."'");
+		$query = $this->db->query("DELETE FROM postit_buddy_list
+								   WHERE requestee_uid='". $user_one ."'
+								   AND requester_uid='". $user_two ."'");
 		if($query){
 			return true;
 		}else{
@@ -70,14 +91,14 @@ class Post extends CI_Model {
 
 	public function getBuddyRequests($uname){
 		$status = [];
-		$query = $this->db->query("SELECT DISTINCT postit_requester_uid,postit_requester_username, status
+		$query = $this->db->query("SELECT DISTINCT requester_uid,requester_username, status
 									 FROM postit_buddy_requests
-									 WHERE postit_requestee_username='". $uname ."' AND status='1'");
+									 WHERE requestee_username='". $uname ."' AND status='1'");
 		if($query->num_rows()>0){
 			foreach ($query->result() as $row) {
 				array_push($status,[
-					"requester" => $row->postit_requester_username,
-					"requester_uid" => $row->postit_requester_uid,
+					"requester" => $row->requester_username,
+					"requester_uid" => $row->requester_uid,
 					"status" => $row->status
 				]);
 			}
@@ -91,8 +112,8 @@ class Post extends CI_Model {
 		$status = [];
 		$query = $this->db->query("SELECT DISTINCT status
 									 FROM postit_buddy_requests
-									 WHERE postit_requestee_username='". $user_one ."'
-									 AND postit_requester_username='". $user_two ."' OR postit_requestee_username='". $user_two ."' AND postit_requester_username='". $user_one ."'");
+									 WHERE requestee_username='". $user_one ."'
+									 AND requester_username='". $user_two ."' OR requestee_username='". $user_two ."' AND requester_username='". $user_one ."'");
 
 		if($query->num_rows()>0){
 			foreach ($query->result() as $row) {
@@ -101,6 +122,18 @@ class Post extends CI_Model {
 			return $status;
 		}else{
 			return $status;
+		}
+	}
+
+	public function checkIfBuddy($user_one,$user_two){
+		$query = $this->db->query("SELECT id
+								   FROM postit_buddy_list
+								   WHERE requestee_username='".$user_one."' AND requester_username='".$user_two."'
+									 OR requestee_username='".$user_two."' AND requester_username='".$user_one."'");
+		if($query->num_rows()==1){
+			return true;
+		}else{
+			return false;
 		}
 	}
 

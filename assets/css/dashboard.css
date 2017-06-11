@@ -136,6 +136,12 @@
 	margin-top: 5%;
 }
 
+.buddy-avatar{
+	width: 100px !important;
+	height: 100px !important;
+	margin: 0 auto !important;
+}
+
 /*
  * Globals
  */

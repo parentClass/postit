@@ -276,7 +276,8 @@
     		});
     }
     function acceptBuddy(uo,ut){
-      $('.btn-accept-'+ut).html("<i class='fa fa-check' aria-hidden='true'></i> Buddy Request Accepted");
+      console.log(uo,ut);
+      $('.btn-accept-'+ut).html("<i class='fa fa-check' aria-hidden='true'></i> Accepted");
       $('.btn-accept-'+ut).addClass("disabled");
       $.ajax({
     				url: "<?php echo site_url('blog/acceptBuddy'); ?>/" + uo + "/" + ut,

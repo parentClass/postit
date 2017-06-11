@@ -80,10 +80,10 @@ class Blog extends CI_Controller {
 			$data['isLoggedIn'] = $this->session->userdata('isLoggedIn');
 			$data['logged_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$this->session->userdata('loggedInAs')),true);
 			$data['viewed_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$blogger_id),true);
-			$data['user_post_count'] = json_decode($this->Post->countUserPosts('@'.$this->session->userdata('loggedInAs')),true);
+			$data['user_post_count'] = json_decode($this->Post->countUserPosts($data['viewed_blogger_data'][0]['uname']),true);
 			$data['user_likes_count'] = 0;
 
-			$buddy_count_json = json_decode($this->Post->countUserBuddy('@'.$this->session->userdata('loggedInAs')),true);
+			$buddy_count_json = json_decode($this->Post->countUserBuddy($data['viewed_blogger_data'][0]['uname']),true);
 
 			if(empty($buddy_count_json)){
 				$buddy = 0;
@@ -98,9 +98,9 @@ class Blog extends CI_Controller {
 
 			$data['buddy_requests'] = $this->Post->getBuddyRequests('@'.$data['currUser']);
 			$data['buddy_status'] = $this->Post->getBuddyStatus('@'.$this->session->userdata('loggedInAs'),$data['viewed_blogger_data'][0]['uname']);
+			$data['isBuddy'] = $this->Post->checkIfBuddy('@'.$this->session->userdata('loggedInAs'),$data['viewed_blogger_data'][0]['uname']);
 
-
-			$likes = json_decode(json_encode($this->Post->countUserLikes('@'.$this->session->userdata('loggedInAs'))),true);
+			$likes = json_decode(json_encode($this->Post->countUserLikes($data['viewed_blogger_data'][0]['uname'])),true);
 
 			if(empty($likes)){
 				$data['user_likes_count'] = 0;
@@ -231,12 +231,12 @@ class Blog extends CI_Controller {
 	}
 
 	public function cancelBuddy($user_one,$user_two){
-		$res = $this->Post->removeBuddyUser($user_one,$user_two);
+		$res = $this->Post->removeBuddyUserRequest($user_one,$user_two);
 		return "success";
 	}
 
 	public function removeBuddy($user_one,$user_two){
-		$res = $this->Post->removeBuddyUser($user_one,$user_two);
+		$res = $this->Post->removeBuddyUserRequest($user_one,$user_two);
 		return "success";
 	}
 

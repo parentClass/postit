@@ -123,46 +123,45 @@
              <? if('@'.$currUser!=$viewed_blogger_data[0]['uname']): ?>
 							 <li>
 								 <div class="btn-group uol" role="group" aria-label="User Operation Links">
-									 <? if($isRequester>=1): ?>
-									 <a href="#!" onclick="sendBuddyRequest(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy">
+									 <? if($isRequester>=1 && $isBuddy != 1): ?>
+									 <a href="#!" onclick="acceptBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-accept-<? echo $row['requester_uid'];?>">
 										 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 										 Accept Buddy Request
 									 </a>
-								 	 <? elseif(empty($buddy_status)): ?>
+								 <? elseif(empty($buddy_status) && $isBuddy != 1): ?>
 											<a href="#!" onclick="sendBuddyRequest(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy">
 												<i class="fa fa-user-plus" aria-hidden="true"></i>
 												Send Buddy Request
 											</a>
-										<? elseif($buddy_status==1): ?>
+										<? elseif(!empty($buddy_status) && $isBuddy != 1): ?>
 												<a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#cancel-buddy-modal">
 												 <i class="fa fa-check" aria-hidden="true"></i>
 												 Buddy Request Sent
 											 </a>
-										<? elseif($buddy_status==2): ?>
-													<a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#remove-buddy-modal">
-													 <i class="fa fa-times" aria-hidden="true"></i>
-													 Buddy
-												 </a>
+										<? elseif($isBuddy==1): ?>
+	 										<a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#remove-buddy-modal">
+	 											 <i class="fa fa-times" aria-hidden="true"></i>
+	 											 Buddy
+	 										</a>
 										<? endif; ?>
 									 <a href="#!" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
 								 </div>
 							 </li>
-					 		<? else: ?>
-								<li>
-									<div class="btn-group user-stats" role="group" aria-label="User Stats">
- 									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i>
-										 <? echo number_format($user_buddy_count); ?>
-									 </a>
-									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-heart-o" aria-hidden="true"></i>
-										 <? echo number_format($user_likes_count); ?>
-									 </a>
- 									 <a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-sticky-note-o" aria-hidden="true"></i>
-										 <? echo number_format(count($user_post_count)); ?>
-									 </a>
- 								 </div>
-							 </li>
                <? endif; ?>
 						 <? endif; ?>
+						 <li>
+							 <div class="btn-group user-stats" role="group" aria-label="User Stats">
+								<a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-handshake-o" aria-hidden="true"></i>
+									<? echo number_format($user_buddy_count); ?>
+								</a>
+								<a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-heart-o" aria-hidden="true"></i>
+									<? echo number_format($user_likes_count); ?>
+								</a>
+								<a class="btn btn-sm btn-outline-default disabled"><i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+									<? echo number_format(count($user_post_count)); ?>
+								</a>
+							</div>
+						</li>
  					 </ul>
 				  </div>
 				</div>

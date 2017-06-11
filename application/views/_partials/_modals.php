@@ -257,10 +257,13 @@
 						</div>
 						<? else: ?>
 							<? foreach($buddy_requests as $row): ?>
-								<div class="card">
-									<img class="card-img-top img-thumbnail" src="../assets/img/back.jpeg" alt="Card image cap">
+								<div class="card buddy-card">
+									<img class="card-img-top buddy-avatar" src="../assets/img/back.jpeg" alt="Card image cap">
 									<div class="card-block">
-										<h4 class="card-title"><? echo $row['requester']; ?></h4>
+										<a href="<? echo substr($row['requester'],1); ?>">
+											<h6 class="card-title"><? echo $row['requester']; ?></h6>
+										</a>
+										</a>
 										<a href="#!" onclick="acceptBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $row['requester_uid'] ?>)" class="btn btn-sm btn-default btn-accept-<? echo $row['requester_uid'];?>">
 											<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 											Accept Request
