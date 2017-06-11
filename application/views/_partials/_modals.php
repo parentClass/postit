@@ -188,16 +188,17 @@
         	</button>
 	      </div>
 	      <div class="modal-body text-center delete-modal-body">
-	        <form>
+	        <form action="javascript:searchForThis()">
 						<div class="form-group">
 					    <label for="search-input">What to search?</label>
-					    <input type="text" class="form-control" class="search-input">
-					    <small id="emailHelp" class="form-text text-muted">You can search for a post or different user<br/>and create connections across the world!</small>
+					    <input type="text" class="form-control" id="search-input" required>
+							<small class="form-text text-danger error-text hidden">There's nothing to search <? echo '@'.$currUser; ?></small>
+					    <small class="form-text text-muted">You can search for a post or different user<br/>and create connections across the world!</small>
 					  </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer justify-content-center">
-	        <a href="#!" onclick="" class="btn btn-md btn-outline-default"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+	        <a href="#!" onclick="searchForThis()" class="btn btn-md btn-outline-default"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
 	      </div>
 	    </div>
 	  </div>
@@ -251,9 +252,8 @@
 						<? if(empty($buddy_requests)): ?>
 						<div class="card">
 							<div class="card-block">
-								<img class="card-img-top img-thumbnail" src="../assets/img/satellite.png" alt="Card image no requests" style="border-color: white !important;">
+								<h6 class="card-title">No Requests</h6>
 							</div>
-							<h6 class="card-title">No Requests</h6>
 						</div>
 						<? else: ?>
 							<? foreach($buddy_requests as $row): ?>

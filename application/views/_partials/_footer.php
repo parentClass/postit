@@ -295,6 +295,25 @@
     				}
     		});
     }
+    function searchForThis(){
+      var search = document.getElementById("search-input").value;
+      if(search=="undefined" || search==""){
+        $('#search-input').addClass("error",function(){
+          $('.error-text').removeClass("hidden");
+        });
+      }else{
+        var metas = ['inuser:','inposts:','intags:'];
+        if(search.toLowerCase().indexOf(metas[0]) >= 0){
+          window.location="<? echo site_url('blog/'); ?>"+ search.toLowerCase().substring(7);
+        }else if(search.toLowerCase().indexOf(metas[1]) >= 0){
+
+        }else if(search.toLowerCase().indexOf(metas[2]) >= 0){
+
+        }else{
+          alert("No results found.");
+        }
+      }
+    }
   </script>
     </body>
 </html>
