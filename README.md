@@ -10,7 +10,7 @@ Another soon to be social media platform for randomness and adventure.
 
 ## Authors
 
-* **Daniel Sarabusing** - *Initial work* - [parentClass](https://github.com/parentClass)
+* **Daniel Sarabusing** - [parentClass](https://github.com/parentClass)
 
 ## License
 
