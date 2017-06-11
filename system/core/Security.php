@@ -485,7 +485,7 @@ class CI_Security {
 
 			if (preg_match('/script|xss/i', $str))
 			{
-				$str = preg_replace('#</*(?:script|xss).*?>#si', '[removed]', $str);
+				$str = preg_replace('#</*(?:script|xss).*?>#si', '', $str);
 			}
 		}
 		while ($original !== $str);

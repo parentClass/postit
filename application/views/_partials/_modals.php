@@ -193,7 +193,8 @@
 					    <label for="search-input">What to search?</label>
 					    <input type="text" class="form-control" id="search-input" required>
 							<small class="form-text text-danger error-text hidden">There's nothing to search <? echo '@'.$currUser; ?></small>
-					    <small class="form-text text-muted">You can search for a post or different user<br/>and create connections across the world!</small>
+					    <small class="form-text text-muted">You can search for a post or different user<br/>and create connections across the world!<br/>
+																									Append metas for specific search,<br/> <code>inuser:&lt;username&gt; <br/> inposts:&lt;about_post&gt; <br/> intags:&lt;tag_name&gt;</code> </small>
 					  </div>
 	        </form>
 	      </div>
