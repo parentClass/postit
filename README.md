@@ -1,4 +1,4 @@
-![alttext](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alttext](https://github.com/parentClass/postit/blob/master/assets/img/postit_113x113.png "Post-it!")
 # Post-it
 
 Another soon to be social media platform for randomness and adventure.
