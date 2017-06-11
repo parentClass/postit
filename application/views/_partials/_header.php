@@ -10,6 +10,8 @@
                 <? else: ?>
                     <? echo $viewed_blogger_data[0]['uname']; ?> | Dashboard
                 <? endif; ?>
+            <? elseif($page_type=="letters"): ?>
+               <? echo $logged_blogger_data[0]['uname']; ?> | Open Letters
             <? elseif($page_type=="unknown"): ?>
                 <? echo "Post-it | Not found!"; ?>
             <? else: ?>
@@ -28,17 +30,16 @@
         <? if($page_type=="login"): ?>
             <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/header.css'>"; ?>
             <? echo "<link rel='stylesheet' type='text/css' href='". site_url() ."assets/css/jquery.fullPage.css'>"; ?>
-        <? elseif($page_type=="dashboard"): ?>
-            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/dashboard.css'>" . "\n"; ?>
-            <? echo "<style>" . "\n"; ?>
-            <? echo ".blog-masthead{background-color:" . $viewed_blogger_data[0]['color_preference'] ."!important ;}" . "\n"; ?>
-            <? echo ".dropdown-menu a:hover{color:". $viewed_blogger_data[0]['color_preference'] .";}" . "\n"; ?>
-            <? echo ".blog-title, .blog-description{font-family:" . $viewed_blogger_data[0]['font_preference'] . ";}" . "\n"; ?>
-            <? echo ".blog-post-menu:hover{color: #651fff;font-family:" . $viewed_blogger_data[0]['color_preference'] . ";text-decoration:none !important;}" . "\n"; ?>
-            <? echo "</style>" . "\n"; ?>
+        <? elseif($page_type=="dashboard" || $page_type=="letters"): ?>
+            <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/postit.css'>" . "\n"; ?>
         <? elseif($page_type=="unknown"): ?>
             <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/unknown.css'"; ?>
         <?endif;?>
+        <? echo "<style>" . "\n"; ?>
+        <? echo ".blog-masthead{background-color:" . $viewed_blogger_data[0]['color_preference'] ."!important ;}" . "\n"; ?>
+        <? echo ".dropdown-menu a:hover{color:". $viewed_blogger_data[0]['color_preference'] .";}" . "\n"; ?>
+        <? echo ".blog-title, .blog-description{font-family:" . $viewed_blogger_data[0]['font_preference'] . ";}" . "\n"; ?>
+        <? echo ".blog-post-menu:hover{color: #651fff;font-family:" . $viewed_blogger_data[0]['color_preference'] . ";text-decoration:none !important;}" . "\n"; ?>
+        <? echo "</style>" . "\n"; ?>
     </head>
 <body class="animated fadeIn">
-         

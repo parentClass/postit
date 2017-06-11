@@ -56,3 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['blog/(:any)'] = 'blog/index/$1';
 $route['blog/(:any)/(:any)/(:any)'] = 'blog/index/$1/$2/$3';
 $route['blog/index/logout'] = 'blog/logout';
+
+$route['letters/(:any)'] = 'letters/index/$1';
+$route['letters/(:any)/(:any)/(:any)'] = 'letters/index/$1/$2/$3';
+$route['letters/index/logout'] = 'blog/logout';

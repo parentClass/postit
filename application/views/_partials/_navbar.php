@@ -26,7 +26,7 @@
                 <i class="fa fa-handshake-o" aria-hidden="true"></i>
                 Buddy Request
               </a>
-              <a href="#!" class="dropdown-item" data-toggle="modal" data-target="#openLetterModal">
+              <a href="../letters/<? echo $currUser; ?>" class="dropdown-item">
                 <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
                 Open Letters
               </a>
