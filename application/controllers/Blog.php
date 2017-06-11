@@ -111,6 +111,7 @@ class Blog extends CI_Controller {
 			}
 
 			$this->load->view('_partials/_header',$data);
+			$this->load->view('_partials/_navbar',$data);
 			$this->load->view('_pages/board',$data);
 			$this->load->view('_partials/_modals',$data);
 			$this->load->view('_partials/_footer',$data);

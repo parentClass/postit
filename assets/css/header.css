@@ -27,7 +27,7 @@ button{
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   color: #212121;
-  font-size: 1rem;
+  font-size: 5rem;
   font-family: 'Pacifico', sans-serif !important;
 }
 .form-signin .checkbox {
@@ -193,12 +193,8 @@ iPad 3
 		margin: 0;
 		overflow: visible !important;
 	}
-
 	body{
 
-	}
-	.form-signin-heading{
-		font-size: 34px !important;
 	}
 	.alert{
 		width: 100%;
