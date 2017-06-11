@@ -35,6 +35,28 @@ class Post extends CI_Model {
 		}
 	}
 
+	public function acceptBuddyRequest($user_one,$user_two){
+		$query = $this->db->query("UPDATE postit_buddy_requests
+								   SET status='2'
+								   WHERE postit_requestee_uid='". $user_one ."' AND postit_requester_uid='". $user_two ."'");
+		if($query){
+			$this->updateBuddyCount($user_one);
+		}else{
+			return false;
+		}
+	}
+
+	public function updateBuddyCount($uid){
+		$query = $this->db->query("UPDATE postit_users
+								   SET buddy_count= buddy_count + 1
+								   WHERE user_id='". $uid ."'");
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public function removeBuddyUser($user_one,$user_two){
 		$query = $this->db->query("DELETE FROM postit_buddy_requests
 								   WHERE postit_requestee_uid='". $user_one ."'
@@ -46,21 +68,22 @@ class Post extends CI_Model {
 		}
 	}
 
-	public function getBuddyRequests($uid){
+	public function getBuddyRequests($uname){
 		$status = [];
-		$query = $this->db->query("SELECT DISTINCT postit_requester_username, status
+		$query = $this->db->query("SELECT DISTINCT postit_requester_uid,postit_requester_username, status
 									 FROM postit_buddy_requests
-									 WHERE postit_requestee_username='". $uid ."'");
+									 WHERE postit_requestee_username='". $uname ."' AND status='1'");
 		if($query->num_rows()>0){
 			foreach ($query->result() as $row) {
 				array_push($status,[
 					"requester" => $row->postit_requester_username,
+					"requester_uid" => $row->postit_requester_uid,
 					"status" => $row->status
 				]);
 			}
 			return $status;
 		}else{
-			return false;
+			return $status;
 		}
 	}
 
@@ -68,15 +91,16 @@ class Post extends CI_Model {
 		$status = [];
 		$query = $this->db->query("SELECT DISTINCT status
 									 FROM postit_buddy_requests
-									 WHERE postit_requestee_username='". $user_two ."'
-									 AND postit_requester_username='". $user_one ."'");
+									 WHERE postit_requestee_username='". $user_one ."'
+									 AND postit_requester_username='". $user_two ."' OR postit_requestee_username='". $user_two ."' AND postit_requester_username='". $user_one ."'");
+
 		if($query->num_rows()>0){
 			foreach ($query->result() as $row) {
 				$status = $row->status;
 			}
 			return $status;
 		}else{
-			return false;
+			return $status;
 		}
 	}
 

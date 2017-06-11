@@ -238,7 +238,7 @@
 	</div>
 
 	<div class="modal fade" id="buddyRequestModal">
-	  <div class="modal-dialog modal-lg buddyRequest-dialog" role="document">
+	  <div class="modal-dialog modal-md buddyRequest-dialog" role="document">
 	    <div class="modal-content buddyRequest-dialog-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title">Buddy Request</h5>
@@ -248,19 +248,27 @@
 	      </div>
 	      <div class="modal-body text-center operations-modal-body">
 					<div class="card-group">
-						<? for($i = 0; $i < 10; $i++): ?>
-						<div class="card" style="width: 20rem;">
-							<img class="card-img-top img-thumbnail" src="../assets/img/back.jpeg" alt="Card image cap">
+						<? if(empty($buddy_requests)): ?>
+						<div class="card">
 							<div class="card-block">
-								<h4 class="card-title">Card title</h4>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="btn btn-sm btn-default">
-									<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-									Accept Request
-								</a>
+								<img class="card-img-top img-thumbnail" src="../assets/img/satellite.png" alt="Card image no requests" style="border-color: white !important;">
 							</div>
+							<h6 class="card-title">No Requests</h6>
 						</div>
-						<? endfor; ?>
+						<? else: ?>
+							<? foreach($buddy_requests as $row): ?>
+								<div class="card">
+									<img class="card-img-top img-thumbnail" src="../assets/img/back.jpeg" alt="Card image cap">
+									<div class="card-block">
+										<h4 class="card-title"><? echo $row['requester']; ?></h4>
+										<a href="#!" onclick="acceptBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $row['requester_uid'] ?>)" class="btn btn-sm btn-default btn-accept-<? echo $row['requester_uid'];?>">
+											<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+											Accept Request
+										</a>
+									</div>
+								</div>
+							<? endforeach; ?>
+						<? endif; ?>
 					</div>
 	      </div>
 	    </div>

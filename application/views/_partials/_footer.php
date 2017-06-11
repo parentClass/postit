@@ -275,6 +275,25 @@
     				}
     		});
     }
+    function acceptBuddy(uo,ut){
+      $('.btn-accept-'+ut).html("<i class='fa fa-check' aria-hidden='true'></i> Buddy Request Accepted");
+      $('.btn-accept-'+ut).addClass("disabled");
+      $.ajax({
+    				url: "<?php echo site_url('blog/acceptBuddy'); ?>/" + uo + "/" + ut,
+    				type: 'POST',
+    				success: function(data){
+
+    				},error: function (jqXHR, textStatus, errorThrown){
+    					console.log(jqXHR + " " + textStatus + " " + errorThrown);
+                // Get the snackbar DIV
+    						var x = document.getElementById("snackbar-danger")
+    						// Add the "show" class to DIV
+    						x.className = "show";
+    						// After 3 seconds, remove the show class from DIV
+    						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    				}
+    		});
+    }
   </script>
     </body>
 </html>

@@ -111,25 +111,39 @@
 				  <div class="card-footer">
 						<ul class="list-unstyled text-center">
             <? if($isLoggedIn): ?>
+							<? $isRequester=0; ?>
+							<? foreach($buddy_requests as $row): ?>
+							 <? if($row['requester'] == $viewed_blogger_data[0]['uname']): ?>
+								 <? $isRequester += 1; ?>
+							 <? else: ?>
+								 <? $isRequester += 0; ?>
+							 <? endif;?>
+							<? endforeach;?>
+
              <? if('@'.$currUser!=$viewed_blogger_data[0]['uname']): ?>
 							 <li>
 								 <div class="btn-group uol" role="group" aria-label="User Operation Links">
-								  <? if(empty($buddy_status)): ?>
+									 <? if($isRequester>=1): ?>
 									 <a href="#!" onclick="sendBuddyRequest(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy">
-										 <i class="fa fa-user-plus" aria-hidden="true"></i>
-										 Send Buddy Request
+										 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+										 Accept Buddy Request
 									 </a>
-								 <? elseif($buddy_status==1): ?>
-										 <a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#cancel-buddy-modal">
-											<i class="fa fa-check" aria-hidden="true"></i>
-											Buddy Request Sent
-										</a>
-								 <? elseif($buddy_status==2): ?>
-											 <a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#remove-buddy-modal">
-												<i class="fa fa-times" aria-hidden="true"></i>
-												Buddy
+								 	 <? elseif(empty($buddy_status)): ?>
+											<a href="#!" onclick="sendBuddyRequest(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy">
+												<i class="fa fa-user-plus" aria-hidden="true"></i>
+												Send Buddy Request
 											</a>
-								 	 <? endif; ?>
+										<? elseif($buddy_status==1): ?>
+												<a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#cancel-buddy-modal">
+												 <i class="fa fa-check" aria-hidden="true"></i>
+												 Buddy Request Sent
+											 </a>
+										<? elseif($buddy_status==2): ?>
+													<a href="#!" onclick="specifyBuddy(<? echo $logged_blogger_data[0]['user_id'] . "," . $viewed_blogger_data[0]['user_id']?>)" class="btn btn-sm btn-outline-default btn-buddy" data-toggle="modal" data-target="#remove-buddy-modal">
+													 <i class="fa fa-times" aria-hidden="true"></i>
+													 Buddy
+												 </a>
+										<? endif; ?>
 									 <a href="#!" onclick="" class="btn btn-sm btn-outline-default"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send Open Letter</a>
 								 </div>
 							 </li>
