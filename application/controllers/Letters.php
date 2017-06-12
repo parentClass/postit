@@ -28,8 +28,10 @@ class Letters extends CI_Controller {
 	{
 		$blogger_id = $this->clean($blogger_id);
 
+		$data['isLoggedIn'] = $this->session->userdata('isLoggedIn');
+
 		// no blogger id (missing uri parameter)
-		if(empty($blogger_id)){
+		if(empty($blogger_id) || empty($data['isLoggedIn'])){
 			redirect('/','refresh');
 		}
 
@@ -45,7 +47,6 @@ class Letters extends CI_Controller {
 
 		$data['page_type'] = "letters";
 		$data['currUser'] = $this->session->userdata('loggedInAs');
-		$data['isLoggedIn'] = $this->session->userdata('isLoggedIn');
 		$data['logged_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$this->session->userdata('loggedInAs')),true);
 		$data['viewed_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$blogger_id),true);
 		$this->load->view('_partials/_header',$data);

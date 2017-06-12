@@ -1,7 +1,7 @@
 /*******************************
  _pages/all
 *******************************/
-@import url(https://fonts.googleapis.com/css?family=Mukta+Vaani|Pacifico|Ubuntu|Peddana|Dosis|Lobster|Lato|Oswald|Cinzel|Tinos|Buda|PT+Sans+Narrow|Open+Sans+Condensed|Josefin+Sans|Raleway|Montserrat|Cinzel);
+@import url(https://fonts.googleapis.com/css?family=Mukta+Vaani|Pacifico|Ubuntu|Peddana|Dosis|Lobster|Lato|Oswald|Cinzel|Tinos|Buda|PT+Sans+Narrow|Open+Sans+Condensed|Josefin+Sans|Raleway|Montserrat|Cinzel|Roboto);
 
 *{
 	margin:0;
@@ -131,7 +131,7 @@
 .card-img-top{
 	border-color: white !important;
 }
-
+ style=""
 .buddyRequest-dialog{
 	margin-top: 5%;
 }
@@ -148,6 +148,15 @@
 
 .hidden{
 	display: none !important;
+}
+
+.ol-card{
+  margin-bottom: 15px;
+  background-color:#fafafa;
+}
+
+.ol-card-block{
+    font-family: 'Cinzel' !important;
 }
 
 /*
