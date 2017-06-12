@@ -22,9 +22,10 @@ class Letters extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Post');
 		$this->load->library('session');
+		$this->load->library('encryption');
 	}
 
-	public function index($blogger_id='')
+	public function index($blogger_id='',$letter_from='',$letter_to='')
 	{
 		$blogger_id = $this->clean($blogger_id);
 
@@ -43,12 +44,20 @@ class Letters extends CI_Controller {
 			case 'userPost':
 				$this->userPost();
 				break;
+			case 'sendLetter':
+				$this->sendLetter($letter_from,$letter_to);
+				break;
+			case 'writeBack':
+					$this->sendLetter($letter_from,$letter_to);
+					break;
 		}
 
 		$data['page_type'] = "letters";
 		$data['currUser'] = $this->session->userdata('loggedInAs');
 		$data['logged_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$this->session->userdata('loggedInAs')),true);
 		$data['viewed_blogger_data'] = json_decode($this->Post->getBloggerData('@'.$blogger_id),true);
+		$data['open_letters'] = $this->getOpenLetters('@'.$data['currUser']);
+		$data['posts_tags_dataset'] = $this->Post->getPostTags();
 		$this->load->view('_partials/_header',$data);
     $this->load->view('_partials/_navbar',$data);
 		$this->load->view('_pages/open_letters', $data);
@@ -56,10 +65,39 @@ class Letters extends CI_Controller {
 		$this->load->view('_partials/_footer',$data);
 	}
 
+	public function sendLetter($letter_from,$letter_to){
+		$data = array(
+			'letter_title' => $this->encryption->encrypt($this->input->post('letter_title')),
+			'letter_body' => $this->encryption->encrypt($this->input->post('letter_body')),
+			'letter_from' => $letter_from,
+			'letter_to' => $letter_to,
+		);
+		$res = $this->Post->sendLetter($data);
+		return "success";
+	}
+
+	public function getOpenLetters($username){
+		$data = array();
+		$res = $this->Post->getOpenLetters($username);
+		if(!empty($res)){
+			foreach ($res as $row) {
+				array_push($data,[
+					"letter_title" => $this->encryption->decrypt($row['letter_title']),
+					"letter_body" => $this->encryption->decrypt($row['letter_body']),
+					"letter_from" => $row['letter_from'],
+					"sent_at" => $row['sent_at']
+				]);
+			}
+		}else{
+			array_push($data,["letter_status"=>"No open letters."]);
+		}
+		return $data;
+	}
 
 	private function clean($string) {
 	   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
 
 	   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 	}
+
 }

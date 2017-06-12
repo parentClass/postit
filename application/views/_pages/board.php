@@ -112,7 +112,6 @@
           <? else: ?>
           		<? $counter = 0; ?>
           	<? foreach($posts_data as $row): ?>
-
           	  <div class="blog-post">
           	  		<div class="float-right">
           	  			<div class="menu">
@@ -153,6 +152,6 @@
       </div><!-- /.row -->
     </div><!-- /.container -->
 
-		<div id="snackbar">We cannot post a unfilled adventure.</div>
+		<div id="snackbar-empty">We cannot post a unfilled adventure.</div>
 		<div id="snackbar-success">Success! I'm about to reload the page in a bit.</div>
 		<div id="snackbar-danger">Failed! I encountered a problem doing the request.</div>

@@ -52,7 +52,7 @@
                 Support developer
               </a>
             <div class="dropdown-divider"></div>
-              <a href="logout" class="dropdown-item">
+              <a href="../blog/logout" class="dropdown-item">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 Sign out
               </a>

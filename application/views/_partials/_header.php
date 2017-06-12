@@ -23,7 +23,7 @@
         <!-- font awesome -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <!-- google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=<? echo (!empty($viewed_blogger_data[0]['font_preference']) ? str_replace(' ', '+', $viewed_blogger_data[0]['font_preference']) : 'Lato') ?>" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato|<? echo (!empty($viewed_blogger_data[0]['font_preference']) ? str_replace(' ', '+', $viewed_blogger_data[0]['font_preference']) : 'Lato') ?>" rel="stylesheet">
         <!-- bootstrap 3.0.2 -->
         <link rel='stylesheet' type='text/css' href='<?php echo site_url() . 'assets/css/bootstrap.css'; ?>'>
         <link rel="stylesheet" type="text/css" href='<?php echo site_url() . 'assets/css/animate.min.css'; ?>'>
@@ -32,14 +32,15 @@
             <? echo "<link rel='stylesheet' type='text/css' href='". site_url() ."assets/css/jquery.fullPage.css'>"; ?>
         <? elseif($page_type=="dashboard" || $page_type=="letters"): ?>
             <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/postit.css'>" . "\n"; ?>
+            <? echo "<style>" . "\n"; ?>
+            <? echo ".blog-masthead{background-color:" . $viewed_blogger_data[0]['color_preference'] ."!important ;}" . "\n"; ?>
+            <? echo ".dropdown-menu a:hover{color:". $viewed_blogger_data[0]['color_preference'] .";}" . "\n"; ?>
+            <? echo ".blog-title, .blog-description{font-family:" . $viewed_blogger_data[0]['font_preference'] . ";}" . "\n"; ?>
+            <? echo ".blog-post-menu:hover{color: " . $viewed_blogger_data[0]['color_preference'] . ";text-decoration:none !important;}" . "\n"; ?>
+            <? echo "</style>" . "\n"; ?>
         <? elseif($page_type=="unknown"): ?>
             <? echo "<link rel='stylesheet' type='text/css' href='". base_url() ."assets/css/unknown.css'"; ?>
         <?endif;?>
-        <? echo "<style>" . "\n"; ?>
-        <? echo ".blog-masthead{background-color:" . $viewed_blogger_data[0]['color_preference'] ."!important ;}" . "\n"; ?>
-        <? echo ".dropdown-menu a:hover{color:". $viewed_blogger_data[0]['color_preference'] .";}" . "\n"; ?>
-        <? echo ".blog-title, .blog-description{font-family:" . $viewed_blogger_data[0]['font_preference'] . ";}" . "\n"; ?>
-        <? echo ".blog-post-menu:hover{color: #651fff;font-family:" . $viewed_blogger_data[0]['color_preference'] . ";text-decoration:none !important;}" . "\n"; ?>
-        <? echo "</style>" . "\n"; ?>
+
     </head>
 <body class="animated fadeIn">

@@ -68,7 +68,7 @@ class Post extends CI_Model {
 	public function removeBuddyUserRequest($user_one,$user_two){
 		$query = $this->db->query("DELETE FROM postit_buddy_requests
 								   WHERE requestee_uid='". $user_one ."'
-								   AND requester_uid='". $user_two ."' 
+								   AND requester_uid='". $user_two ."'
 									 OR requestee_uid='". $user_two ."'
 								   AND requester_uid='". $user_one ."' ");
 		if($query){
@@ -358,6 +358,35 @@ class Post extends CI_Model {
 								   WHERE user_id='". $user_id ."'");
 		if($query){
 			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function sendLetter($data){
+
+		$data = array(
+					"letter_title"=> $data['letter_title'],
+					"letter_body"=> $data['letter_body'],
+					"letter_from"=> '@'.$data['letter_from'],
+					"letter_to"=>	 '@'.$data['letter_to']
+		); //uid,username, uid,username
+
+		$outcome = $this->db->insert('postit_letters',$data);
+		if($outcome){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function getOpenLetters($username){
+		$query = $this->db->query("SELECT letter_title,letter_body,letter_from, DATE_FORMAT(sent_at, '%M %e, %Y around %r') AS sent_at
+								   FROM postit_letters
+								   WHERE letter_to='". $username ."'
+								   ORDER BY sent_at DESC");
+		if($query->num_rows()>0){
+			return json_decode(json_encode($query->result()),true);
 		}else{
 			return false;
 		}

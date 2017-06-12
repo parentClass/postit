@@ -1,7 +1,10 @@
 /*******************************
  _pages/all
 *******************************/
-@import url(https://fonts.googleapis.com/css?family=Mukta+Vaani|Pacifico|Ubuntu|Peddana|Dosis|Lobster|Lato|Oswald|Cinzel|Tinos|Buda|PT+Sans+Narrow|Open+Sans+Condensed|Josefin+Sans|Raleway|Montserrat|Cinzel|Roboto);
+@import url(https://fonts.googleapis.com/css?family=Mukta+Vaani|Pacifico|Ubuntu|
+						Peddana|Dosis|Lobster|Lato|Oswald|Cinzel|Tinos|Buda|PT+Sans+Narrow|
+						Open+Sans+Condensed|Josefin+Sans|Raleway|Montserrat|Cinzel|Roboto|
+						Playfair+Display);
 
 *{
 	margin:0;
@@ -155,8 +158,14 @@
   background-color:#fafafa;
 }
 
-.ol-card-block{
-    font-family: 'Cinzel' !important;
+.letter-body{
+	margin-top: 2%;
+		text-indent: 1.5% !important;
+}
+
+@font-face {
+	font-family: 'Symbola';
+	src: url('assets/fonts/symbola.ttf');
 }
 
 /*
@@ -303,7 +312,7 @@ h6, .h6 {
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar {
+#snackbar-empty {
     visibility: hidden; /* Hidden by default. Visible on click */
     min-width: 250px; /* Set a default minimum width */
     margin-left: -125px; /* Divide value of min-width by 2 */
@@ -320,7 +329,34 @@ h6, .h6 {
 
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show {
+#snackbar-empty.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar-empty-letter {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #d9534f; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 9999999; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+}
+
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar-empty-letter.show {
     visibility: visible; /* Show the snackbar */
 
 /* Add animation: Take 0.5 seconds to fade in and out the snackbar.

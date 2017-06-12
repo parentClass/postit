@@ -101,6 +101,68 @@
 	  </div>
 	</div>
 
+	<!-- Write letter Modal -->
+	<div class="modal fade" id="writeLetterModal" tabindex="-1" role="dialog" aria-labelledby="writeLetterModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Write letter</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      	<div class="modal-body">
+	      		<form action="#" id="writeletter-form">
+				  <div class="form-group">
+				    <label for="letter_title">Letter title</label>
+				    <input type="text" class="form-control" id="letter_title" name="letter_title" aria-describedby="letter_title" required>
+				  </div>
+					<div class="form-group">
+				    <label for="letter_receiver">Letter receiver</label>
+				    <input type="text" class="form-control" id="letter_receiver" name="letter_receiver" aria-describedby="letter_receiver" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="letter_body">Letter body</label>
+				    <textarea class="form-control" id="letter_body" name="letter_body" rows=11 cols=50 required></textarea>
+				  </div>
+				</form>
+			</div>
+	      	<div class="modal-footer">
+			    <button type="button" onclick="writeLetter()" id="btn-update" class="btn btn-md btn-success">Send letter</button>
+			</div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Writeback Modal -->
+	<div class="modal fade" id="writeBackModal" tabindex="-1" role="dialog" aria-labelledby="writeBackModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Write back</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      	<div class="modal-body">
+	      		<form action="#" id="writeback-form">
+				  <div class="form-group">
+				    <label for="letter_title">Letter title</label>
+				    <input type="text" class="form-control" id="letter_title" name="letter_title" aria-describedby="letter_title" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="letter_body">Letter body</label>
+				    <textarea class="form-control" id="letter_body" name="letter_body" rows=11 cols=50 required></textarea>
+				  </div>
+				</form>
+			</div>
+	      	<div class="modal-footer">
+			    <button type="button" onclick="writeBack()" id="btn-update" class="btn btn-md btn-success">Respond letter</button>
+			</div>
+	    </div>
+	  </div>
+	</div>
+
 	<div class="modal fade" id="post-error-modal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
