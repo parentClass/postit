@@ -50,6 +50,9 @@ class Letters extends CI_Controller {
 			case 'writeBack':
 					$this->sendLetter($letter_from,$letter_to);
 					break;
+			case 'ignoreLetter':
+					$this->ignoreLetter($letter_from,$letter_to);
+					break;
 		}
 
 		$data['page_type'] = "letters";
@@ -67,8 +70,8 @@ class Letters extends CI_Controller {
 
 	public function sendLetter($letter_from,$letter_to){
 		$data = array(
-			'letter_title' => $this->encryption->encrypt($this->input->post('letter_title')),
-			'letter_body' => $this->encryption->encrypt($this->input->post('letter_body')),
+			'letter_title' => $this->encryption->encrypt((!empty($this->input->post('letter_title'))) ? $this->input->post('letter_title') : $this->input->post('wrbletter_title')),
+			'letter_body' => $this->encryption->encrypt((!empty($this->input->post('letter_body'))) ? $this->input->post('letter_body') : $this->input->post('wrbletter_body')),
 			'letter_from' => $letter_from,
 			'letter_to' => $letter_to,
 		);
@@ -92,6 +95,13 @@ class Letters extends CI_Controller {
 			array_push($data,["letter_status"=>"No open letters."]);
 		}
 		return $data;
+	}
+
+	public function ignoreLetter($letter_from,$letter_to){
+
+		$res = $this->Post->ignoreLetter($letter_from,$letter_to);
+
+		return "success";
 	}
 
 	private function clean($string) {

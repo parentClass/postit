@@ -29,10 +29,10 @@
             <p class="card-text text-justify letter-body">
               <? echo $row['letter_body']; ?>
             </p>
-            <a href="#!" onclick="writeBackTo(<? echo '@'. $currUser . ',' . $row['letter_from']; ?>)" class="card-link" data-toggle="modal" data-target="#writeBackModal">
+            <a href="#!" onclick="writeBackTo('<? echo '@'. $currUser . "','" . $row['letter_from']; ?>')" class="card-link" data-toggle="modal" data-target="#writeBackModal">
               Write back
             </a>
-            <a href="#!" class="card-link">
+            <a href="#!" onclick="specifyLetter(<? echo '@'. $currUser . ',' . $row['letter_from']; ?>)" class="card-link ignore-link" data-toggle="modal" data-target="#ignoreLetterModal">
               Ignore letter
             </a>
           </div>

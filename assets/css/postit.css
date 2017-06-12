@@ -119,7 +119,7 @@
 	border-color: transparent !important;
 }
 
-.operations-dialog,.search-dialog, .remove-buddy-dialog, .cancel-buddy-dialog{
+.operations-dialog,.search-dialog, .remove-buddy-dialog, .cancel-buddy-dialog, .ignore-letter-dialog{
 	margin-top: 20%;
 }
 
@@ -134,7 +134,7 @@
 .card-img-top{
 	border-color: white !important;
 }
- style=""
+
 .buddyRequest-dialog{
 	margin-top: 5%;
 }

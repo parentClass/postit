@@ -391,6 +391,16 @@ class Post extends CI_Model {
 			return false;
 		}
 	}
+
+	public function ignoreLetter($letter_from,$letter_to){
+		$query = $this->db->query("DELETE FROM postit_letters
+								   WHERE letter_from='".'@'.$letter_from."' AND letter_to='".'@'.$letter_to."'");
+		if($query){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 
 ?>

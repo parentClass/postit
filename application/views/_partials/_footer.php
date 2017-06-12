@@ -317,16 +317,15 @@
       }
     }
     function writeBackTo(lf,lt){
-      localStorage.setItem("lf_id",lf);
-      localStorage.setItem("lt_id",lt);
+      localStorage.setItem("lf_uname",lf);
+      localStorage.setItem("lt_uname",lt);
     }
     function writeBack(){
-      var lf_id = localStorage.getItem("lf_id");
-      var lt_id = localStorage.getItem("lt_id");
-      if($('#letter_title').val() != "" && $('#letter_body').val().length > 0){
+      var lf_uname = localStorage.getItem("lf_uname").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      var lt_uname = localStorage.getItem("lt_uname").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      if($('#wrbletter_title').val() != "" && $('#wrbletter_body').val().length > 0){
           $.ajax({
-            url : "<?php echo site_url('letters/writeBack') . '/1/1' ?>",
-            // url : "<?php echo site_url('letters/sendLetter'); ?>/" + lf_id + "/" + lt_id,
+            url : "<?php echo site_url('letters/sendLetter'); ?>/" + lf_uname + "/" + lt_uname,
             type: 'POST',
             data: $('#writeback-form').serialize(),
             success: function(data){
@@ -350,8 +349,8 @@
             }
         });
       }else{
-        if($('#letter_title').val() == ""){$('#letter_title').addClass('error');}else{$('#letter_title').removeClass('error');}
-        if($('#letter_body').val() == ""){$('#letter_body').addClass('error');}else{$('#letter_body').removeClass('error');}
+        if($('#wrbletter_title').val() == ""){$('#wrbletter_title').addClass('error');}else{$('#wrbletter_title').removeClass('error');}
+        if($('#wrbletter_body').val() == ""){$('#wrbletter_body').addClass('error');}else{$('#wrbletter_body').removeClass('error');}
         // Get the snackbar DIV
         var x = document.getElementById("snackbar-empty-letter")
         // Add the "show" class to DIV
@@ -401,6 +400,38 @@
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
       }
+    }
+    function specifyLetter(lf,lt){
+      localStorage.setItem("lf_uname",lf);
+      localStorage.setItem("lt_uname",lt);
+    }
+    function ignoreLetter(){
+      var lf = localStorage.getItem("lf_uname").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      var lt = localStorage.getItem("lt_uname").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      $.ajax({
+            url: "<?php echo site_url('letters/ignoreLetter'); ?>/" + lf + "/" + lt,
+            type: 'POST',
+            success: function(data){
+              $("#ignoreLetterModal").modal('hide');
+              // Get the snackbar DIV
+              var x = document.getElementById("snackbar-success")
+              // Add the "show" class to DIV
+              x.className = "show";
+              // After 3 seconds, remove the show class from DIV
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+              setTimeout(function(){
+                   location.reload();
+              }, 2000)
+            },error: function (jqXHR, textStatus, errorThrown){
+              console.log(jqXHR + " " + textStatus + " " + errorThrown);
+                // Get the snackbar DIV
+                var x = document.getElementById("snackbar-danger")
+                // Add the "show" class to DIV
+                x.className = "show";
+                // After 3 seconds, remove the show class from DIV
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            }
+        });
     }
     </script>
   <? endif; ?>

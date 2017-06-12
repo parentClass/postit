@@ -147,12 +147,12 @@
 	      	<div class="modal-body">
 	      		<form action="#" id="writeback-form">
 				  <div class="form-group">
-				    <label for="letter_title">Letter title</label>
-				    <input type="text" class="form-control" id="letter_title" name="letter_title" aria-describedby="letter_title" required>
+				    <label for="wrbletter_title">Letter title</label>
+				    <input type="text" class="form-control" id="wrbletter_title" name="wrbletter_title" aria-describedby="wrbletter_title" required>
 				  </div>
 				  <div class="form-group">
-				    <label for="letter_body">Letter body</label>
-				    <textarea class="form-control" id="letter_body" name="letter_body" rows=11 cols=50 required></textarea>
+				    <label for="wrbletter_body">Letter body</label>
+				    <textarea class="form-control" id="wrbletter_body" name="wrbletter_body" rows=11 cols=50 required></textarea>
 				  </div>
 				</form>
 			</div>
@@ -212,6 +212,23 @@
 	      </div>
 	      <div class="modal-footer justify-content-center">
 	        <a href="#!" onclick="deleteUserPost()" class="btn btn-md btn-outline-danger">Yes</a>
+	        <a href="#!" class="btn btn-md btn-outline-primary" data-dismiss="modal">No</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="ignoreLetterModal">
+	  <div class="modal-dialog ignore-letter-dialog" role="document">
+	    <div class="modal-content ignore-letter-dialog-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Notification</h5>
+	      </div>
+	      <div class="modal-body text-center delete-modal-body">
+	        <p>Are you sure you want to ignore this letter?</p>
+	      </div>
+	      <div class="modal-footer justify-content-center">
+	        <a href="#!" onclick="ignoreLetter()" class="btn btn-md btn-outline-danger">Yes</a>
 	        <a href="#!" class="btn btn-md btn-outline-primary" data-dismiss="modal">No</a>
 	      </div>
 	    </div>
