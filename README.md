@@ -20,4 +20,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Open source tools found on the web and assets.
-* The project is actually inspired by the mixture of [Tumblr](https://www.tumblr.com/login) and [Twitter](https://twitter.com/).
+* The project is inspired by the mixture of [Tumblr](https://www.tumblr.com/login) and [Twitter](https://twitter.com/).
